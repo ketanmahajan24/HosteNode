@@ -1,0 +1,33 @@
+<% layout("/layouts/boilerplate") -%>
+
+<br><br>
+<h3 class="revenue-heading">Payment History of <%= member.name %></h3>
+
+<div class="table-container">
+  <table border="1">
+    <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Payment Date</th>
+        <th>Amount Paid</th>
+        <th>Payment Mode</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (payments.length) { %>
+        <% payments.forEach((payment, index) => { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= new Date(payment.paymentDate).toLocaleDateString('en-GB') %></td>
+            <td>₹<%= payment.amountPaid.toLocaleString() %></td>
+            <td><%= payment.paymentMode %></td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="5" style="text-align: center;">No Payment Records Found</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,119 @@
+<% layout("/layouts/boilerplate") -%> 
+<br>
+<div class="main-body-page bg-light p-2 " style="border-radius: 6px;">
+    <div class="d-flex gap-2 cols m-1">
+        <!-- "Add New Floor" Heading-->
+        <div class="col-7">
+            <p class="new-form-heading">Add New Room</p>
+            
+        </div>
+        <!-- "<Back" Button-->
+        <div class="col-6">
+            <a href="./" style="color: #021e2b;" class="col-12 btn"> <i class="fa-solid fa-chevron-left"></i>  Back </a>
+        </div>
+    </div>
+<hr>
+
+    <div class="container student-box">
+
+
+        <!-- COURSES DETAILS FORMS -->
+
+        <!-- <div class=" contact-info" style=" padding: 100px;  background-color: rgba(0, 73, 168, 0.637);"> -->
+ 
+            <form method="POST" action="/newroom " class="row g-4 needs-validation">
+                <div class="col-md-4">
+                    <label for="validationCustom05" class="form-label">  Floor Number </label>
+                    <select name="room[floor_id]"  class="form-select" aria-label="Default select example" required>
+                      <option value="" selected>Select Floor</option>
+                      <% floors.forEach(floor => { %>
+                      <option value="<%= floor._id %>"><%= floor.floor_name %> </option>
+                      <% }) %>
+                      <!-- it will be Dynamic from Floor section-->
+                       
+                    </select>
+
+                  
+
+                    <div class="invalid-feedback">
+                      Please provide a valid Mobile.
+                    </div>
+                  </div>
+
+                    
+              <div class="col-md-4">
+                <label for="validationCustom05" class="form-label">Room Number</label>
+                <input type="text" name="room[room_number]" placeholder="Eg: G-01, 101, 202" class="form-control" id="validationCustom05" maxlength="16"   value=""  required>
+                <div class="invalid-feedback">
+                  Please provide a valid Mobile.
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="validationCustom05" class="form-label">Fees Per Member </label>
+                <input type="text" name="room[room_fees]" placeholder="Eg: 4000,5000" class="form-control" id="validationCustom05" maxlength="16"   value=""  required>
+                <div class="invalid-feedback">
+                  Please provide a valid Mobile.
+                </div>
+              </div>
+                
+                
+                <div class="col-md-4">
+                  <label for="validationCustom05" class="form-label"> Sharing Capacity</label>
+                  <input type="number"   name="room[sharing_capacity]" maxlength="10" class="form-control" id="validationCustom05"placeholder="Eg: 6,5,4" required>
+                  <div class="invalid-feedback">
+                    Please provide a valid Mobile No.
+                  </div>
+                </div>
+                  
+                
+                  
+                <div class="col-md-4">
+                    <label for="validationCustom05" class="form-label"> Date of Create</label>
+                    <input type="date" name="room[created_at]" class="form-control" id="validationCusto1" required>
+
+                    <div class="invalid-feedback">
+                      Please provide a valid DOB.
+                    </div>
+                  </div> 
+
+                  <div class="col-12 d-flex justify-content-center">
+                    <button type="submit" class="col-6 btn btn-info">Add Room</button>
+                </div>
+                
+            </form>
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--CREATE DATE////////////////////////////// -->
+<!-- FOR ACCESING BY DEFAULT "TODAY" DATE --><!-- START -->
+<script>
+  let today = new Date();
+  let day = String(today.getDate()).padStart(2, '0');
+  let month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  let year = today.getFullYear();
+  let formattedDate = `${year}-${month}-${day}`; // Convert to yyyy-mm-dd format for input type="date"
+
+  document.getElementById("validationCusto1").value = formattedDate;
+</script>
+<!-- END -->

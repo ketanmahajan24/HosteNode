@@ -1,0 +1,69 @@
+<% layout("/layouts/boilerplate") -%> 
+<br><br>
+<h3 class="revenue-heading">All Members</h3>
+
+<div class="table-container">
+  <form action="/member/search" method="post">
+    <div class="row">
+      <div class="col-7" style="margin-left: 20px;">
+          <input name="name" type="text" class="form-control" id="validationCustom01" maxlength="16" placeholder="Enter Name or Mobile"  required>
+          <div class="invalid-feedback">
+            Please provide a valid Mobile.
+          </div>
+        </div>
+        <button class="col-4 btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+  </div>
+  <hr>
+    </form>
+<table  border="1">
+    <tr>
+        <th>S. No.</th>
+        <th>Name</th>
+        <th>Father's Name</th>
+        <th>Mobile No.</th>
+        <th>Aadhar No.</th>
+        <th>Address</th>
+        <th>Profession</th>
+        <th>Joining Date</th>
+        <th>Assigned Room</th>
+        <th>Room Fees</th>
+        <th>Status</th>
+        <th>Left Date</th>
+        
+        <th><i class="fa-solid fa-user-pen"></i></th>
+        <th><i class="fa-solid fa-user-xmark"></i></th>
+        
+    </tr>
+       
+        <% allMembers.forEach((Member, index) => { %>
+    <tr>
+        <td><%=index+1%></td>
+        <td><%=Member.name%></td>
+        <td><%=Member.fatherName%></td>
+        <td><%=Member.mobileNo%></td>
+        <td><%=Member.aadharNo%></td>
+        <td><%=Member.address%></td>
+        <td><%=Member.profession%></td>
+        <td><%=Member.joiningDate.toLocaleDateString("en-GB")%></td>
+        <td><%=Member.assignedRoom%></td>
+         
+        <td>
+            <% if (Member.payments.length > 0){%> 
+              ₹<%= Member.payments[0].roomFees%>
+            <%} else {%> 
+              N/A
+            <%}%>
+          </td>
+          <td><%=Member.status%></td>
+          <td><%= Member.leftDate ? `${Member.leftDate.getDate().toString().padStart(2, '0')}/${(Member.leftDate.getMonth()+1).toString().padStart(2, '0')}/${Member.leftDate.getFullYear()}` : '' %></td>
+
+
+            <!-- <td><a style="color:  #293042;" href="/members/<%=Member._id%>/addpayment"> <button class="btn btn-info" type="submit"><i class="fa-solid fa-location-arrow"></i>Pay</button></a></td> -->
+        
+        <td><button class="btn" type="submit"><i class="fa-solid fa-pen-to-square"></i></button></td>
+        <td ><button class="btn" type="submit" ><i class="fa-solid fa-trash"></i></button></td>
+    </tr>
+    <% }); %>
+             
+     </table>
+</div>

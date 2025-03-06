@@ -1,0 +1,98 @@
+<% layout("/layouts/boilerplate") -%> 
+<br><br>
+<div class="main-body-page bg-light p-2" style="border-radius: 6px;">
+    
+    <div class="d-flex gap-2 cols m-1">
+        <!-- "Add New Member" Heading-->
+        <div class="col-7">
+            <p class="new-form-heading">Add New Member</p>
+        </div>
+        <!-- "<Back" Button-->
+        <div class="col-6">
+            <a href="./" style="color: #021e2b;" class="col-12 btn"> <i class="fa-solid fa-chevron-left"></i>  Back </a>
+        </div>
+    </div>
+<hr>
+
+    <div class="container student-box">
+        <form method="POST" action="/newMember" class="row g-4 needs-validation">
+            
+            <!-- <div class="col-md-3">
+                <label for="validationCustom01" class="form-label">Serial No.</label>
+                <input type="text" name="member[serial_no]" class="form-control" value="1000" required>
+            </div> -->
+            
+            <div class="col-md-4">
+                <label for="validationCustom02" class="form-label">Name</label>
+                <input type="text" name="member[name]" class="form-control" required>
+            </div>
+            
+            <div class="col-md-4">
+                <label for="validationCustom03" class="form-label">Father's Name</label>
+                <input type="text" name="member[fatherName]" class="form-control" required>
+            </div>
+            
+            <div class="col-md-4">
+                <label for="validationCustom04" class="form-label">Mobile No.</label>
+                <input type="number" name="member[mobileNo]" class="form-control" maxlength="10" required>
+            </div>
+            
+            <div class="col-md-4">
+                <label for="validationCustom05" class="form-label">Aadhar No.</label>
+                <input type="number" name="member[aadharNo]" class="form-control" maxlength="12" required>
+            </div>
+            
+            <div class="col-md-6">
+                <label for="validationCustom06" class="form-label">Address</label>
+                <input type="text" name="member[address]" class="form-control" required>
+            </div>
+            
+            <div class="col-md-4">
+                <label for="validationCustom07" class="form-label">Joining Date</label>
+                <input type="date" name="member[joiningDate]" class="form-control" id="joinDate" required>
+            </div>
+          
+             
+            
+            <div class="col-md-4">
+                <label for="validationCustom10" class="form-label">Assigned Room</label>
+                <select name="member[assignedRoom_id]"  class="form-select" aria-label="Default select example" required>
+                    <option value="" selected>Select Room To Assign</option>
+                    <% rooms.forEach(room => { %>
+                    <option value="<%= room._id %>"><%= room.room_number %> &nbsp;&nbsp;&nbsp;&nbsp;/   Fees:  <i class="fa-solid fa-indian-rupee-sign"></i><%=room.room_fees%></option>
+                    <% }) %>
+                    <!-- it will be Dynamic from Floor section-->
+                     
+                  </select>
+            </div>
+           
+             
+           
+             
+            <div class="col-md-4">
+                <label for="validationCustom10" class="form-label">Profession</label>
+                <select name="member[profession]" class="form-select" required>
+                    <option value="" selected >Select Profession</option>
+                    <option value="Student">Student</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Business">Business</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="col-12 d-flex justify-content-center">
+                <button type="submit" class="col-6 btn btn-info">Add Member</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Set Default Joining Date to Today -->
+<script>
+  let today = new Date();
+  let day = String(today.getDate()).padStart(2, '0');
+  let month = String(today.getMonth() + 1).padStart(2, '0'); 
+  let year = today.getFullYear();
+  let formattedDate = `${year}-${month}-${day}`;
+  document.getElementById("joinDate").value = formattedDate;
+</script>

@@ -1,0 +1,48 @@
+<% layout("/layouts/boilerplate") -%>
+
+<br><br>
+<h3 class="revenue-heading">All Members Fees Records</h3>
+<div class="table-container">
+  <form action="/searchfeesrecords" method="post">
+    <div class="row">
+      <div class="col-7" style="margin-left: 20px;">
+          <input name="searchQuery" type="text" class="form-control" id="validationCustom01" maxlength="16" placeholder="Enter Name or Mobile"  required>
+          <div class="invalid-feedback">
+            Please provide a valid Mobile.
+          </div>
+        </div>
+        <button class="col-4 btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+  </div>
+  <hr>
+    </form>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Name</th>
+        <th>Mobile No.</th>
+        <th>Total Fees</th>
+        <th>Advanced Paid</th>
+    
+        <th>Amount Paid</th>
+    
+        <th>Due Amount</th>
+        <th>Last Payment Date</th>
+        <th>Payment Mode</th>
+        <th>Payment Status</th>
+        <th>Add Payment</th>
+        <th>History</th>
+         
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="14" style="text-align:center;">
+        <% if (errorMessage) { %>
+            <h5 style="color: red;"><%= errorMessage %> !</h5>
+        <% } %>
+      </td>
+  
+    </tbody>
+  </table>
+</div>

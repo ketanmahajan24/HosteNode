@@ -1,0 +1,77 @@
+<% layout("/layouts/boilerplate") -%>
+
+<br><br>
+<h3 class="revenue-heading">All Members Fees Records</h3>
+<div class="table-container">
+  <form action="/searchfeesrecords" method="post">
+    <div class="row">
+      <div class="col-7" style="margin-left: 20px;">
+          <input name="searchQuery" type="text" class="form-control" id="validationCustom01" maxlength="16" placeholder="Enter Name or Mobile"  required>
+          <div class="invalid-feedback">
+            Please provide a valid Mobile.
+          </div>
+        </div>
+        <button class="col-4 btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+  </div>
+  <hr>
+    </form>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Name</th>
+        <th>Mobile No.</th>
+        <th>Total Fees</th>
+        <th>Advanced Paid</th>
+    
+        <th>Amount Paid</th>
+    
+        <th>Due Amount</th>
+        <th>Last Payment Date</th>
+        <th>Payment Mode</th>
+        <th>Payment Status</th>
+        <th>Add Payment</th>
+        <th>History</th>
+         
+      </tr>
+    </thead>
+    <tbody>
+      <% allMembers.forEach((member, index) => {%>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= member.name %></td>
+          <td><%= member.mobileNo %></td>
+          <td>₹<%= member.totalFees.toLocaleString() %></td>
+          <td>₹<%= member.advancedPaid.toLocaleString() %></td>
+          <td>₹<%= member.amountPaid.toLocaleString() %></td>
+          <td>₹<%= member.dueAmount.toLocaleString() %></td>
+          <td>
+            <% if (member.payments.length) { %>
+              <%= new Date(member.payments[member.payments.length - 1].paymentDate).toLocaleDateString('en-GB') %>
+            <% } else { %>
+              N/A
+            <% } %>
+          </td>
+          <td>
+            <% if (member.payments.length) { %>
+              <%= member.payments[member.payments.length - 1].paymentMode %>
+            <% } else {%>
+              N/A
+            <% } %>
+          </td>
+          <td style="background-color: <%= member.dueAmount === 0 ? 'rgba(60, 255, 0, 0.322)' : 'rgba(255, 0, 0, 0.445)' %>;">
+            <%= member.dueAmount === 0 ? "Paid" : "Pending" %>
+          </td>
+          <td><a style="color:  #293042;" href="/members/<%=member._id%>/addpayment"> <button class="btn btn-info" type="submit"><i class="fa-solid fa-location-arrow"></i>  Pay </button> </a> </td>
+          <td>
+            <a href="/payment-history/<%= member._id %>" class="btn btn-info btn-sm">
+              <i class="fa-solid fa-clock-rotate-left"></i> History
+            </a>
+          </td>
+           
+        
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

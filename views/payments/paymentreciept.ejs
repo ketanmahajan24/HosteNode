@@ -1,0 +1,91 @@
+<% layout("/layouts/boilerplate") -%>
+
+<br>
+<div style="display: flex; width:100vw; ">
+<div class="payment-bg p-4" style="justify-content: center; border-radius: 6px; background-color: rgba(228, 252, 237, 0.932); min-height: 850px; width: 100%;" >
+  <div class="d-flex justify-content-between align-items-center flex-wrap" style="margin-top: 0.7rem;">
+    <!-- Add Payment Heading -->
+    <div>
+      <p class="new-form-heading m-0">Payment Done</p>
+    </div>
+
+    <!-- Back Button -->
+    <div>
+      <a href="/allfeesrecords" class="btn btn-outline-dark">
+        <i class="fa-solid fa-chevron-left"></i> Back
+      </a>
+    </div>
+  </div>
+  <hr>
+
+  <!-- Responsive Form Section -->
+  <div class="d-flex justify-content-center">
+    <div class="w-80" style="max-width: 1400px;">
+      <div style="min-height: 800px; width: 800px; padding: 5px; background: #87ce96; border-radius: 50%; margin-left: -450px;">
+        <br>
+        <div class="main-body-page bg-light p-4 shadow-sm" style="margin: 0 auto; max-width: 1000px; margin-left: 450px; border-radius: 12px;">
+
+          <!-- Member Details -->
+          <div  class="col-12" style="justify-content: center;">
+           
+    <div style="background-color: green; border-radius: 8px;" class="d-flex gap-2 cols m-1">
+      <!-- "Add New Member" Heading-->
+      <div  class="col-7">
+          <p class="new-form-heading" style="color: azure; padding: 10px;">Member Payment Succesfully Added</p>
+      </div>
+      <!-- "<Back" Button-->
+      <i style="font-size: 50px; color: azure; margin: auto;" class="fa-solid fa-circle-check"></i>
+  </div>
+            <hr>
+            <h6>Name: <span class="fw-bold" style="font-size: 16px;"><%= member.name %></span></h6>
+            <hr>
+            <h6>Father Name: <span class="fw-bold" style="font-size: 16px;"><%= member.fatherName %></span></h6>
+            <hr>
+            <h6>Mobile: <span class="fw-bold" style="font-size: 16px;"><%= member.mobileNo %> <hr></span> Room No : <span class="fw-bold" style="font-size: 16px;"><%= member.assignedRoom %></span></h6>
+            <hr>
+
+            <!-- Assigned Room and Paid Amount Side-by-Side -->
+            <div class=" justify-content-between">
+              <h6>Paid Amount: <span class="fw-bold" style="font-size: 16px;">
+                <i class="fa-solid fa-indian-rupee-sign"></i> <%= payment.amountPaid.toLocaleString() %>
+              </span></h6>              
+            </div>
+            <hr>
+              <!-- Payment Mode -->
+          <div class="col-12 mb-3">
+
+            <h6>Payment Mode: <span class="fw-bold" style="font-size: 16px;">
+             <%= payment.paymentMode %>
+            </span></h6>
+          </div>
+<hr>
+            <h6>Date of Payment: <span class="fw-bold" style="font-size: 16px;"><%= new Date(payment.paymentDate).toLocaleDateString('en-GB') %></span></h6>
+            <hr>
+          </div>
+
+          <!-- Amount Received -->
+
+          <!-- Confirm Payment Button -->
+          <div class="col-12 d-flex justify-content-center">
+            <button type="button" class="btn btn-outline w-75" onclick="window.print()"> <i class="fa-solid fa-download"></i> Print Receipt</button>
+            <a style="margin-left:10px;" href="https://wa.me/91<%=member.mobileNo%>?text=Dear <%=member.name%>, your payment receipt details:%0A
+              Name: <%=member.name%>%0A
+              Father's Name: <%=member.fatherName%>%0A
+              Mobile: <%=member.mobileNo%>%0A
+              Room No: <%=member.assignedRoom %>%0A
+              Paid Amount: ₹<%=payment.amountPaid.toLocaleString()%>%0A
+              Payment Mode: <%= payment.paymentMode%>%0A
+              Date of Payment: <%= new Date(payment.paymentDate).toLocaleDateString('en-GB')%>%0A
+              Thank you for your payment! - Hostel Management" 
+                      target="_blank" 
+                      class="btn btn-outline"> 
+                      <i class="fa-solid fa-share"></i> Send Receipt
+                  </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

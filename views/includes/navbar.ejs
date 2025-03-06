@@ -1,0 +1,207 @@
+
+<nav  class="navbar navbar-dark fixed-top" style="background-color: rgb(12, 20, 24);">
+  <div class="container-fluid"> 
+
+    <button class="navbar-toggler " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <span class="product-logo">
+      <img style="height: 2rem; border-radius: 50%;" src="/images/product_icon.jpg" alt="user img">
+       <a  class="navbar-brand montserrat-subrayada-regular" href="/" >HostelNode</a>
+    </span>
+   
+    <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+      <div class="offcanvas-header">
+        <!-- <img style="height: 2rem; border-radius: 50%;" src="/images/product_icon.jpg" alt="user img"> -->
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dashboard</h5>
+        <button type="button" class="cross-btn btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      
+      <div style="overflow: scroll; scrollbar-width: none;" class="offcanvas-body">
+        <ul  class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"></a>
+          </li>
+            <!-- MANAGE MEMBERS  --> <!--Start  -->
+            <li>
+              <a class="nav-link dropdown-item" href="/revenue"> <i class="fa-solid fa-chart-pie"></i> Revenue Reports </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-users"></i>  Manage Members 
+              </a>
+              <ul class="dropdown-menu" >
+                <!-- <li><a class="nav-link dropdown-item" href="/newmember"><i class="fa-solid fa-plus"></i>Add Members</a></li> -->
+                <li><a class="nav-link dropdown-item" href="/activeMember">Active Mambers</a></li>
+                <li><a class="nav-link dropdown-item" href="/members">View All Mambers</a></li>
+              
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <!--   
+                <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+              </ul>
+            </li>
+    <!-- MANAGE MEMBERS  --> <!--End -->
+
+  <!-- MANAGE PAYMENTS  --> <!--Start  -->
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa-solid fa-indian-rupee-sign"> </i> Payments
+    </a>
+    
+    <ul class="dropdown-menu" >
+      <li><a class="nav-link dropdown-item" href="#"> <i class="fa-solid fa-circle-plus"> </i> Add Payment</a></li>
+      <li><a class="nav-link dropdown-item" href="/allfeesrecords"> <i class="fa-solid fa-file-invoice-dollar"></i> View Fees Structure </a></li>
+      <li><a class="nav-link dropdown-item" href="/upcomingPayments"> <i class="fa-solid fa-clock-rotate-left"></i> Upcoming Payments</a></li>
+      <li><a class="nav-link dropdown-item" href="/deureports"> <i class="fa-solid fa-money-bills"></i> Dues Report</a></li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+    </ul>
+  </li>
+<!-- MANAGE PAYMENTS  --> <!--End -->
+
+
+        
+    <!-- MANAGE ROOMS  --> <!--Start  -->
+     <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-building"></i> Rooms
+      </a>
+      <ul class="dropdown-menu" >
+        <li><a class="nav-link dropdown-item" href="/newroom"><i class="fa-solid fa-plus"></i> Add Room</a></li>
+        
+        <li><a class="nav-link dropdown-item" href="/allrooms"> View All Rooms</a></li>     
+        <li><a class="nav-link dropdown-item" href="/managerooms"> Manage Rooms</a></li>
+        <!-- <li><a class="nav-link dropdown-item" href="/createbeds"> Assign Beds to Room</a></li> -->
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+      </ul>
+    </li>
+<!-- MANAGE ROOMS  --> <!--End -->
+ 
+    <!-- MANAGE BEDS  --> <!--Start  -->
+    <!-- <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa-solid fa-bed"></i> Beds
+      </a>
+      <ul class="dropdown-menu" >
+        <li><a class="nav-link dropdown-item" href="/allbeds">View All Beds</a></li>
+        <li><a class="nav-link dropdown-item" href="/avlbleBeds">Check Available Beds</a></li>
+        
+            <li><a class="nav-link dropdown-item" href="/rooms">Assign Beds to Room</a></li> -->
+        
+        <!-- <li>
+          <hr class="dropdown-divider">
+        </li>
+      </ul>
+    </li> -->
+<!-- MANAGE BEDS --> <!--End -->
+
+  <!-- MANAGE FLOORS  --> <!--Start  -->
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa-solid fa-city"></i> Floors
+    </a>
+    <ul class="dropdown-menu" >
+        <li><a class="nav-link dropdown-item" href="/newfloor"><i class="fa-solid fa-plus"></i> Add Floor</a></li>
+        
+        <li><a class="nav-link dropdown-item" href="/floors">View All Floors</a></li>
+        <li><a class="nav-link dropdown-item" href="managefloor">Manage Floors</a></li>
+    
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </li>
+<!-- MANAGE FLOORS  --> <!--End -->
+          
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Reviews</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#"> <i class="fa-solid fa-gear"></i> Settings</a>
+          </li>
+          
+          <!-- <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"></a>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li> -->
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li> -->
+        </ul>
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-info" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+    
+    <span style=" color: #ffffff;" class="material-symbols-outlined">
+      search
+    </span>
+    <span style="display: flex;">
+    <span  style="margin:auto 1rem;">
+     <i class="fa-solid fa-bell " style="color: #ffffff; "></i> <!-- NOTIFICAION BELL -->
+    </span>
+    <span >
+      
+      <!-- PROFILE  -->
+      <!-- <button class="navbar-toggler" type="button"> -->
+        <img  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="height: 2rem; border-radius: 25%; margin-right: 1rem;" src="/images/ketan_passport_2025.jpg" alt="user img">
+      <!-- </button> -->
+      <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </span>
+  </span>
+
+  </div>
+</nav>
+<br>

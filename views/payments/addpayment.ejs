@@ -1,0 +1,91 @@
+<% layout("/layouts/boilerplate") -%>
+<br>
+<div class="payment-bg p-4" style="border-radius: 6px; background-color: rgba(228, 252, 237, 0.932); min-height: 850px; ">
+  <div class="d-flex justify-content-between align-items-center flex-wrap" style="margin-top: 0.7rem;">
+    <!-- Add Payment Heading -->
+    <div >
+      <p class="new-form-heading m-0">Add Payment</p>
+    </div>
+
+    <!-- Back Button -->
+    <div>
+      <a href="../" class="btn btn-outline-dark">
+        <i class="fa-solid fa-chevron-left"></i> Back
+      </a>
+    </div>
+  </div>
+  <hr>
+   
+  <!-- Responsive Form Section -->
+  <div class="d-flex justify-content-center">
+    <div class="position-relative w-100" style="max-width: 1400px;">
+      <div  style="min-height: 800px ; width: 800px;padding: 5px;background: #87ce96; border-radius: 50%; margin-left: -450px;">
+        <br>
+        <div class="main-body-page bg-light p-4 shadow-sm" style="margin: 0px auto; max-width: 1000px; margin-left: 450px;">
+          <form method="POST" action="/addpayment/<%=member._id%>" class="row g-4 needs-validation"  >
+
+            <!-- Member Details -->
+            <div class="col-12">
+               
+              <h6>Name: <span class="fw-bold" style="font-size: 16px;"><%= member.name %></span></h6>
+              <hr>
+              <h6>Father Name: <span class="fw-bold" style="font-size: 16px;"><%= member.fatherName %></span></h6>
+              <hr>
+              <h6>Mobile: <span class="fw-bold" style="font-size: 16px;"><%= member.mobileNo %></span></h6>
+              <hr>
+              <h6 for="validationCustom05" class="form-label"> Assigned Room :   &nbsp;&nbsp; &nbsp;&nbsp; Total Payable:  <p style="font-size: 16px;"> <b> <%=member.assignedRoom%>  &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;<i class="fa-solid fa-indian-rupee-sign"></i><%=dueAmount.toLocaleString() %></b></p> </h6>
+              <hr>
+              <h6>Date of Joining: <span class="fw-bold" style="font-size: 16px;"><%= member.joiningDate.toLocaleDateString("en-GB") %></span></h6>
+              <hr>
+            </div>
+
+            <!-- Amount Received -->
+            <div class="col-12">
+              <label for="amountReceived" class="form-label">Enter Amount Received from Member</label>
+              <input type="number" name="payment[amountPaid]" placeholder="Eg: 4000, 5000" class="form-control" id="amountReceived" min=1 required>
+              <div class="invalid-feedback">Please provide a valid amount.</div>
+            </div>
+
+            <!-- Payment Mode -->
+            <div class="col-12">
+              <label for="paymentMode" class="form-label">Payment Mode</label>
+              <select id="paymentMode" name="payment[paymentMode]" class="form-select" required>
+                <option value="" disabled selected>Select Payment Mode</option>
+                <option value="Cash">Cash</option>
+                <option value="UPI">UPI</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Cheque">Cheque</option>
+                <option value="Net Banking">Net Banking</option>
+              </select>
+              <div class="invalid-feedback">Please select a payment mode.</div>
+            </div>
+
+            <!-- Date of Payment -->
+            <div class="col-12">
+              <label for="paymentDate" class="form-label">Date of Payment</label>
+              <input type="date" name="payment[paymentDate]" class="form-control" id="paymentDate" required>
+              <div class="invalid-feedback">Please provide a valid date.</div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col-12 d-flex justify-content-center">
+              <button type="submit" class="btn btn-success w-75">Confirm Payment</button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Automatically Set Today's Date -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById("paymentDate").value = today;
+  });
+</script>

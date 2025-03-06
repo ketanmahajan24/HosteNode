@@ -1,0 +1,53 @@
+<% layout("/layouts/boilerplate") -%>
+<br><br>
+<div class="main-body-page">
+    <br>
+    <div class="d-flex gap-2 cols m-1">
+        <!-- Select Floor Dropdown -->
+        <div class="col-7">
+            <select id="floorFilter" class="form-select btn btn-info">
+                <option value="all" selected>All Floors</option>
+                <% for (let Floor of allFloors){%>         
+                <option value="<%=Floor.floor_name%>"> Floor-<%=Floor.floor_name%> </option>
+                <%}%>   
+
+            </select>
+        </div>
+        <!-- Add Room Button -->
+        <div class="col-5">
+            <a href="/newroom" class="col-10 btn btn-outline-info "> <i class="fa-solid fa-plus"></i> Add Room </a>
+        </div>
+    </div>
+    <br>
+    <!-- Room Cards Container -->
+    <div id="roomContainer" class="card-container-room">
+        <% for (let Room of allRooms){%>        
+        <!-- Example Room Cards -->
+      <!--  ROOMS  -->
+        <div class="card card-room <%= Room.sharing_capacity === Room.occupied_beds? 'card-room-occupied' : 'card-room-available' %>" data-floor="<%=Room.floor_name%>">
+            <p style="color: #ffffff;font-size: 14px; background-color:   #021e2b; border-radius: 5PX; padding: 4px;"><b><%=Room.room_number%> &nbsp; / &nbsp; <%=Room.sharing_capacity%> Sharing</b></p>
+            <p style="color: #ffffff;font-size: 12px; background-color:   #021e2b; border-radius: 5PX; padding: 4px;"> <b>Fees : <i class="fa-solid fa-indian-rupee-sign"></i> <%=Room.room_fees%></b></p>
+            <p><h4><%=Room.sharing_capacity - Room.occupied_beds%> <i class="fa-solid fa-bed"></i></h4><b>Available</b></p>
+        </div>
+
+        <%}%>        
+        
+       <!--  ROOMS container end --->
+    </div>
+</div>
+
+
+<script>
+    document.getElementById("floorFilter").addEventListener("change", function() {
+        let selectedFloor = this.value;
+        let rooms = document.querySelectorAll(".card-room");
+        
+        rooms.forEach(room => {
+            if (selectedFloor === "all" || room.getAttribute("data-floor") === selectedFloor) {
+                room.style.display = "block";
+            } else {
+                room.style.display = "none";
+            }
+        });
+    });
+</script>

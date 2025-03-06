@@ -1,0 +1,39 @@
+<% layout("/layouts/boilerplate") -%> 
+<br><br>
+<h3 class="revenue-heading">Active Member</h3>
+<div class="table-container">
+
+<table border="1">
+    <tr>
+        <th>S. No.</th>
+        <th>Name</th>
+        <th>Father's Name</th>
+        <th>Mobile No.</th>
+        <th>Aadhar No.</th>
+        <th>Address</th>
+        <th>Profession</th>
+        <th>Joining Date</th>
+        <th>Assigned Room</th>  
+        <th>Change Status</th>
+    </tr>
+    <% allMembers.filter(member => member.status === "Active").forEach((Member, index) => { %>
+    <tr>
+        <td><%=index+1%></td>
+        <td><%=Member.name%></td>
+        <td><%=Member.fatherName%></td>
+        <td><%=Member.mobileNo%></td>
+        <td><%=Member.aadharNo%></td>
+        <td><%=Member.address%></td>
+        <td><%=Member.profession%></td>
+        <td><%=Member.joiningDate.toLocaleDateString("en-GB");%></td>
+        <td><%=Member.assignedRoom%></td>
+        <td>
+            <a href="/activeMember/<%=Member._id %>" class="btn btn-info btn-sm">
+                <button class="btn btn-info" type="submit" ><i class="fa-solid fa-delete-left"> </i> Mark as Inactive</button>
+            </a>
+        </td>
+    </tr>
+       <% }); %>
+            
+     </table>
+</div>

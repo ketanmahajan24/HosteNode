@@ -1,0 +1,22 @@
+<% layout("/layouts/boilerplate") -%> 
+<br> <br>
+<h3 class="revenue-heading">Manage Floors</h3>
+<div class="table-container">
+<table border="1">
+    <tr>
+        <th>S. No.</th>
+        <th>Floor Name </th>
+        <th>Delete</th>
+    </tr>
+    <% for (let Floor of allFloors){%>               
+        
+        <tr><td>1</td><td> <%=Floor.floor_name%>  </td>
+            <td>
+                <form method="POST" action="/managefloor/<%=Floor._id%>?_method=DELETE">
+                    <button class="btn p-0 border-0 bg-transparent"><i class="fa-solid fa-trash-can"></i></button>
+                </form>
+            </td>
+     
+    <%}%>            
+</table>
+</div>

@@ -1,0 +1,43 @@
+<% layout("/layouts/boilerplate") -%>
+<div class="main-body-page">
+        <br><br>
+        <hr>
+        <div class="cols" style=" display: flex; justify-content: center;">
+                <a href="/newfloor" class="col-10 btn btn-outline-info "> <i class="fa-solid fa-plus"></i> Add Floor </a>
+        </div>
+        <br>
+        <div class="card-container"> 
+            <% for (let Floor of allFloors){%>   
+            <div class="card card-3">
+                <div class="row m-1">
+                        <span class="col-2" >
+                                <p style="color: #ffffff;font-size: 35px;  padding:10px auto; border-radius: 50%; justify-items: center;"><b><%=Floor.floor_name%> </b></p>
+                                
+                        </span>
+                        <span class="col-3"  style="justify-content: center; text-align: left;">
+                            <h6><%=Floor.occupied_rooms%> <i class="fa-solid fa-square-check"></i></h6>
+                            <hr>
+                            <p> Rooms :<b> <%=Floor.total_rooms%> </b></p>
+                        </span>
+                        <span class="col-3"  style="justify-content: center; text-align: left;">
+                            <h6><%=Floor.occupied_beds%> <i class="fa-solid fa-square-check"></i></h6>
+                            <hr>
+                            <p>Beds :<b> <%=Floor.total_beds%> </b></p>
+                        </span>
+                        <span class="col-4"  style="justify-content: center; text-align: left;">
+                            <h6><%=Floor.active_number%> <i class="fa-solid fa-square-check"></i></h6>
+                            <hr>
+                            <p>Active Member </b></p>
+                        </span>
+                </div>
+            </div>
+            <%}%>        
+           
+   
+            
+        </div>
+              
+</div>
+        
+
+ 

@@ -1,0 +1,49 @@
+<% layout("/layouts/boilerplate") -%> 
+<br><br>
+<h3 class="revenue-heading">Dues Payments Records</h3>
+<div class="table-container">
+<table class="m-1" border="1">
+    <tr>
+        <th>#</th> <!-- Serial Number -->
+        <th>Name</th>
+        <th>Room No.</th>
+        <th>Total<br> Fee</th>
+        <th>Paid <br> Amount</th>
+        <th>Due<br> Amount</th>
+        <th>Due<br> Date</th>
+        <th>Actions</th> <!-- Send Reminder / Mark as Paid -->
+    </tr>
+    <tbody>
+        <% allMembers.forEach((member, index) => { 
+             if (member.dueAmount > 0) { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= member.name %></td>
+            <td><%= member.assignedRoom %></td>
+            <td>₹<%= member.totalFees.toLocaleString() %></td>
+            <td>₹<%= member.amountPaid.toLocaleString() %></td>
+            <td style="background-color: <%= member.dueAmount === 0 ? 'rgba(60, 255, 0, 0.322)' : 'rgba(255, 0, 0, 0.445)' %>;" >₹<%= member.dueAmount.toLocaleString() %></td>
+            <td>
+              <% if (member.payments.length) { %>
+                <%= new Date(member.payments[member.payments.length - 1].paymentDate).toLocaleDateString('en-GB') %>
+              <% } else { %>
+                N/A
+              <% } %>
+            </td>
+            <td>
+              <a href="tel:<%= member.mobileNo%>" class="btn btn-success">
+                <i class="fa-solid fa-phone"></i> Call
+              </a>
+              <a href="https://wa.me/91<%=member.mobileNo%>?text=Dear <%=member.name%>, your due amount is ₹<%=member.dueAmount%>. Please clear your dues Today.
+                                                           -HostelNode Management " 
+        target="_blank" class="btn btn-warning">
+        📩 Send Reminder
+    </a>
+            </td>
+            
+          </tr>
+        <% } }) %>
+      </tbody>
+      
+     </table>
+</div>

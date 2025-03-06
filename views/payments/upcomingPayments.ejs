@@ -1,0 +1,43 @@
+<% layout("/layouts/boilerplate") -%> 
+<br><br>
+<h3 class="revenue-heading">Upcoming 5 Days Payments</h3>
+<div class="table-container">
+<table border="1" class="m-1">
+    <tr>
+            <th>#</th> <!-- Serial Number -->
+            <th>Name</th>
+            <th>Room No.</th>
+            <th>Monthly <br> Fee</th>
+            <th>Payable <br>Date</th>  
+            <th>Actions</th> <!-- Send Reminder / Accept Payment -->
+    </tr>
+    
+        <tbody>
+    <tr>
+        <% allMembers.filter(member => member.status === "Active").forEach((Member, index) => { %>
+            <tr>
+                <td><%=index+1%></td>
+                <td><%=Member.name%></td>
+                <td><%=Member.assignedRoom%></td>
+                 
+                <td>
+                    <% if (Member.payments.length > 0){%> 
+                      ₹<%= Member.payments[0].roomFees%>
+                    <%} else {%> 
+                      N/A
+                    <% } %>
+                  </td>
+                <td><%=Member.joiningDate.toLocaleDateString("en-GB");%></td>
+                <td><a href="tel:<%=Member.mobileNo%>"   class="btn btn-success "> <i class="fa-solid fa-phone"></i>  Call </a></td>
+        
+    </tr>        
+
+    <% }); %>
+
+        </tbody>
+    </table>
+    </tr>
+    
+             
+     </table>
+</div>

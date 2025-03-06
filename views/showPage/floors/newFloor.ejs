@@ -1,0 +1,55 @@
+<% layout("/layouts/boilerplate") -%> 
+<br>
+<div class="main-body-page bg-light p-2 " style="border-radius: 6px;">
+    <div class="d-flex gap-2 cols m-1">
+        <!-- "Add New Floor" Heading-->
+        <div class="col-7">
+            <p class="new-form-heading">Add New Floor</p>
+        </div>
+        <!-- "<Back" Button-->
+        <div class="col-6">
+            <a href="./" style="color: #021e2b;" class="col-12 btn"> <i class="fa-solid fa-chevron-left"></i>  Back </a>
+        </div>
+    </div>
+<hr>
+
+    <div class="container student-box">
+
+        <!-- COURSES DETAILS FORMS -->
+
+        <!-- <div class=" contact-info" style=" padding: 100px;  background-color: rgba(0, 73, 168, 0.637);"> -->
+ 
+            <form method="POST" action="/newfloor" class="row g-4 needs-validation">
+                <div class="col-12">
+                    <label for="validationCustom05" class="form-label"> Course Name </label>
+                    
+                    <select name="floor[floor_name]" class="form-select" aria-label="Default select example" required>
+                      <option selected value="">Select to Create floor</option>
+                      <option value="G">Ground Floor</option>
+                      <option value="1">1st Floor</option>
+                      <option value="2">2nd Floor</option>
+                      <option value="3">3rd Floor</option>
+                      <option value="4">4th Floor</option>
+                      <option value="5">5th Floor</option>
+                      <option value="6">6th Floor</option>
+                      <option value="7">7th Floor</option>
+                      <option value="8">8th Floor</option>
+                      <option value="9">9th Floor</option>
+                      <option value="10">10th Floor</option>
+                      
+                       
+                    </select>
+                    <div class="invalid-feedback">
+                      Please provide a valid Mobile.
+                    </div>
+                  </div>
+                  <div class="col-12 d-flex justify-content-center">
+                    <button type="submit" class="col-6 btn btn-info">Add Floor</button>
+                </div>
+                
+            </form>
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+ 
