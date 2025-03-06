@@ -195,15 +195,15 @@ app.post("/newroom", async (req, res) =>{
  
 // BEDS//////////////////////////////////////////////////////////////////////////////////////////////////
     //  Assing Bed to Room
-//     app.get("/createbeds",(req,res)=>{
-//         res.render("showPage/rooms/createBed.ejs")
-//     })
-//     app.get("/allbeds",(req,res)=>{
-//         res.render("showPage/allbeds.ejs")
-//     })
-//     app.get("/avlbleBeds",(req,res)=>{
-//     res.render("showPage/availablebeds.ejs");
-// })
+    app.get("/createbeds",(req,res)=>{
+        res.render("showPage/rooms/createBed.ejs")
+    })
+    app.get("/allbeds",(req,res)=>{
+        res.render("showPage/allbeds.ejs")
+    })
+    app.get("/avlbleBeds",(req,res)=>{
+    res.render("showPage/availablebeds.ejs");
+})
 // MEMBERS //////////////////////////////////////////////////////////////////////////////////////////////////
     // View all Members
     app.get ("/members",async (req,res)=>{
@@ -310,7 +310,7 @@ app.get("/managerooms/:id/edit",async(req,res)=>{
 
 // PUT route to update room details
 app.put("/manageroom/:id", async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params;z
 
   const room = await Room.findById(id); 
   console.log(room.sharing_capacity);
@@ -326,6 +326,7 @@ app.put("/manageroom/:id", async (req, res) => {
           room_fees,
           sharing_capacity
       });
+      
 
       res.redirect("/managerooms");  // Redirect after update
   } catch (error) {
