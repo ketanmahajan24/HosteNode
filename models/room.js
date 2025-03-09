@@ -38,6 +38,12 @@ const roomSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // This references the User collection
+    required: true,
+  }
+  
 });
 
 const Room = mongoose.model("Room", roomSchema);

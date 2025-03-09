@@ -7,9 +7,9 @@
     </button>
     <span class="product-logo">
       <img style="height: 2rem; border-radius: 50%;" src="/images/product_icon.jpg" alt="user img">
-       <a  class="navbar-brand montserrat-subrayada-regular" href="/" >HostelNode</a>
+       <a  class="navbar-brand montserrat-subrayada-regular" href="/user" >HostelNode</a>
     </span>
-   
+    
     <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
         <!-- <img style="height: 2rem; border-radius: 50%;" src="/images/product_icon.jpg" alt="user img"> -->
@@ -74,8 +74,8 @@
       <ul class="dropdown-menu" >
         <!-- <li><a class="nav-link dropdown-item" href="/newroom"><i class="fa-solid fa-plus"></i> Add Room</a></li> -->
         
-        <li><a class="nav-link dropdown-item" href="/allrooms"> View All Rooms</a></li>     
-        <li><a class="nav-link dropdown-item" href="/managerooms"> Manage Rooms</a></li>
+        <li><a class="nav-link dropdown-item" href="/user/allrooms"> View All Rooms</a></li>     
+        <li><a class="nav-link dropdown-item" href="/user/managerooms"> Manage Rooms</a></li>
         <!-- <li><a class="nav-link dropdown-item" href="/createbeds"> Assign Beds to Room</a></li> -->
         <li>
           <hr class="dropdown-divider">
@@ -110,8 +110,8 @@
     <ul class="dropdown-menu" >
         <!-- <li><a class="nav-link dropdown-item" href="/newfloor"><i class="fa-solid fa-plus"></i> Add Floor</a></li> -->
         
-        <li><a class="nav-link dropdown-item" href="/floors">View All Floors</a></li>
-        <li><a class="nav-link dropdown-item" href="managefloor">Manage Floors</a></li>
+        <li><a class="nav-link dropdown-item" href="/user/floors">View All Floors</a></li>
+        <li><a class="nav-link dropdown-item" href="/user/managefloor">Manage Floors</a></li>
     
       <li>
         <hr class="dropdown-divider">
@@ -170,11 +170,12 @@
       <!-- </button> -->
       <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Profile</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><%=user.name%></h5> <br>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <p><%=user.username%></p>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
@@ -196,8 +197,8 @@
             </li>
           </ul>
           <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+             
+             <a  class="btn btn-outline-success"  href="/user/logout">Logout</a>
           </form>
         </div>
       </div>

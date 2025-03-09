@@ -11,7 +11,7 @@ const floorSchema = new Schema({
     floor_name: {
         type: String,
         required: true,
-        unique: true ,
+        // unique: true ,
     },
     total_rooms: {
         type: Number,
@@ -37,7 +37,13 @@ const floorSchema = new Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", // This references the User collection
+        required: true,
     }
+
 });
         
 // Automatically update floor data when a room is added/updated

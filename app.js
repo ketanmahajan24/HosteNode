@@ -1,14 +1,45 @@
 require('dotenv').config() //env variable
+const LoalStrategy=require('passport-local').Strategy
 
 const express= require("express")
 const app = express();
 const bodyParser = require("body-parser");
-
 const methodOverride = require('method-override');
+
+
+
+const cookieParser = require('cookie-parser');
+const cors = require('cors');  // ✅ Import CORS
+
+app.use(cookieParser()); // ✅ Use cookie-parser to parse cookies
+
+
+app.use(cors({
+    origin: 'http://localhost:8080', // Your frontend URL
+    credentials: true // ✅ Allow cookies to be sent
+}));
+
+app.use(express.json());
+
+
+
+
+
+
+//REQUIRing MIDDLEWARES
+const logRequest = require('./Middlewares/logRequest.js');  // Import middleware
+const passport = require('./Middlewares/auth.js');  // Import middleware
+// const captureLocation = require('./Middlewares/captureLocation.js'); // Import
+const userRoutes=require('./routes/userRoutes.js')
+const jwtAuthMiddleware = require('./jwt.js') 
+
+
+// set middleware for use
+// app.use(logRequest);
+// app.use(captureLocation);  // Apply globally (every request will log location)
 
 // Override with POST having ?_method=PUT
 app.use(methodOverride('_method'));
-
 
 // DATABASE CONNECTION 
 
@@ -30,6 +61,8 @@ const Floor = require("./models/floor.js"); // Floor SCHEMA
 const Room = require("./models/room.js"); // room SCHEMA
 const Member = require("./models/member.js"); // room SCHEMA
 const Payment = require("./models/payment.js"); // Payment SCHEMA
+const User = require('./models/user.js'); 
+
 
 const ejsMate=require("ejs-mate");//require ejs-Mate for boilerplate
 
@@ -37,99 +70,126 @@ const ejsMate=require("ejs-mate");//require ejs-Mate for boilerplate
 app.set("view engine","ejs");
 
 app.set("views",path.join(__dirname,"views"));
-
 app.use(express.static(path.join(__dirname,"public")));
 app.engine("ejs",ejsMate);
 // app.get("/",(req,res)=>{
 //     res.send("Rot is working");
 // });
 
-app.get("/",(req,res)=>{
-    res.render("dashboard.ejs");
+app.use('/user', userRoutes);
+// Middleware
+app.use(express.json());
+app.use(cookieParser());
+
+// app.use(passport.initialize());
+// const localAuthMiddleware = passport.authenticate('local', { session: false });
+
+// Route to login and generate token
+app.post('/user/login', (req, res) => {
+  const user = { id: 1, name: "Ketan" };
+  const token = generateToken(user);
+
+  // Set token in cookies
+  res.cookie('token', token, { httpOnly: true }).json({ message: "Login Successful" });
 });
-app.get("/allmember",(req,res)=>{
-    res.render("showPage/memberData/Allmember.ejs");
+ 
+
+// app.use(new LocalStrategy(async (username,password)))
+//Part-1 Render 1st home Page- """Dashboard"""////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////// from dashboaard.ejs ////////////////////////////////////////////////////////
+// app.get("/",jwtAuthMiddleware,async(req,res)=>{
+//   // const { username, password } = req.query;
+//   // console.log(username,password);
+//   res.render("dashboard.ejs"); 
+// });  
+
+////////////// """"Signup""""""//""""Login""""/////////////////////////////////////
+
+//""""""""""""""""""Signup""""""""""""""""""/////////////////////////////
+app.get("/signup",(req,res)=>{
+  res.render("authPrivate/signup.ejs");
 })
-app.get("/activeMembers",(req,res)=>{
-    res.render("showPage/memberData/activeMember.ejs");
+app.get("/login",(req,res)=>{
+  res.render("authPrivate/login.ejs");
 })
 
 // FLOORS////////////////////////////////////////////////////////////////////////////////////////////////
-    // View all Floors
-    app.get("/floors",async(req,res)=>{
-      const allFloors= await Floor.find({}); 
-      res.render("showPage/floors/floor.ejs",{allFloors});
-    })
+    // // View all Floors
+    // app.get("/floors",async(req,res)=>{
+    //   const allFloors= await Floor.find({}); 
+    //   // console.log(user);
+    //   res.render("showPage/floors/floor.ejs",{allFloors});
+    // })
    
-// Taking input values from newFloor // route ->{"/admin/students/new"}
-app.post("/newfloor", async (req, res) => {
-    try {
-      const { floor_name } = req.body.floor;
-      // console.log(floor_name);
+// // Taking input values from newFloor // route ->{"/admin/students/new"}
+// app.post("/newfloor", async (req, res) => {
+//     try {
+//       const { floor_name } = req.body.floor;
+//       // console.log(floor_name);
 
 
-       // 🔎 Check if a floor with the same name already exists
-    const existingFloor = await Floor.findOne({floor_name : floor_name});
-    if (existingFloor) {
-      return res.status(400).send(`<h1> ${floor_name} floor with this name already exists.</h1>`);
-    }
-      // Create a new student with the data from the request body
-      const newFloor = new Floor(req.body.floor);
+//        // 🔎 Check if a floor with the same name already exists
+//     const existingFloor = await Floor.findOne({floor_name : floor_name});
+//     if (existingFloor){
+//       return res.status(400).send(`<h1> ${floor_name} floor with this name already exists.</h1>`);
+//     }
+//       // Create a new student with the data from the request body
+//       const newFloor = new Floor(req.body.floor);
 
-      // Attempt to save the student to the database
-      await newFloor.save();
+//       // Attempt to save the student to the database
+//       await newFloor.save();
     
-      // If successful, redirect to the students list page
-      res.redirect("/floorS");
-      console.log("New Floor Added:", newFloor);
-    } catch (error){
-      // Log the error to the console for debugging
-      console.error("Error saving blog:", error);
+//       // If successful, redirect to the students list page
+//       res.redirect("/floorS");
+//       console.log("New Floor Added:", newFloor);
+//     } catch (error){
+//       // Log the error to the console for debugging
+//       console.error("Error saving blog:", error);
     
-      // Check if the error is a MongoDB duplicate key error
-      if (error.code === 11000) {
-        // Duplicate key error (for example, unique constraint on a field like prn)
-        res.status(400).send("Error: Duplicate entry detected. Please ensure unique values for unique fields.");
-      } else if (error.name === "ValidationError"){
-        // Mongoose validation error
-        res.status(400).send("Validation Error: " + error.message);
-      } else {
-        // General server error for other unexpected issues
-        res.status(500).send("An unexpected error occurred. Please try again later.");
-      }
-    }
-  });
+//       // Check if the error is a MongoDB duplicate key error
+//       if (error.code === 11000) {
+//         // Duplicate key error (for example, unique constraint on a field like prn)
+//         res.status(400).send("Error: Duplicate entry detected. Please ensure unique values for unique fields.");
+//       } else if (error.name === "ValidationError"){
+//         // Mongoose validation error
+//         res.status(400).send("Validation Error: " + error.message);
+//       } else {
+//         // General server error for other unexpected issues
+//         res.status(500).send("An unexpected error occurred. Please try again later.");
+//       }
+//     }
+//   });
 
-    //Manage all Floor
-    app.get("/managefloor", async (req,res)=>{ 
-        const allFloors= await Floor.find({}); 
-        res.render("showPage/floors/managefloor.ejs",{allFloors});
-    })
-    //Add New Floor
-    app.get("/newfloor",(req,res)=>{
-        res.render("showPage/floors/newFloor.ejs")
-    })
+    // //Manage all Floor
+    // app.get("/managefloor", async (req,res)=>{ 
+    //     const allFloors= await Floor.find({}); 
+    //     res.render("showPage/floors/managefloor.ejs",{allFloors});
+    // })
+    // //Add New Floor
+    // app.get("/newfloor",(req,res)=>{
+    //     res.render("showPage/floors/newFloor.ejs")
+    // })
 // ROOMS//////////////////////////////////////////////////////////////////////////////////////////////////
-    // View all Rooms 
-    app.get("/allrooms", async(req,res)=>{
-        const allRooms= await Room.find({}); 
-        const allFloors= await Floor.find({}); 
-        res.render("showPage/rooms/allrooms.ejs",{allRooms,allFloors});
-        
-    })
-    // Manage all Rooms
-    app.get("/managerooms",async (req,res)=>{
+    // // View all Rooms 
+    // app.get("/allrooms", async(req,res)=>{
+    //     const allRooms= await Room.find({}); 
+    //     const allFloors= await Floor.find({}); 
+    //     res.render("showPage/rooms/allrooms.ejs",{allRooms,allFloors});
+    // })
+    
+    // // Manage all Rooms
+    // app.get("/managerooms",async (req,res)=>{
 
-      const allRooms= await Room.find({});  
+    //   const allRooms= await Room.find({});  
 
 
-        res.render("showPage/rooms/managerooms.ejs",{allRooms});
-    })
+    //     res.render("showPage/rooms/managerooms.ejs",{allRooms});
+    // })
      //Add New Room
-     app.get("/newroom", async (req,res)=>{
-        const floors= await Floor.find({}); 
-        res.render("showPage/rooms/newRoom.ejs",{floors});
-    })
+    //  app.get("/newroom", async (req,res)=>{
+    //     const floors= await Floor.find({}); 
+    //     res.render("showPage/rooms/newRoom.ejs",{floors});
+    // })
 
     
 // Taking input values from newFloor // route ->{"/admin/students/new"}
@@ -283,17 +343,16 @@ await Floor.findByIdAndUpdate(room.floor_id, { $inc: { active_number: -1,occupie
   res.redirect("/members");
 })
 
-// DELETE FLOOR /////////////////////////////////////////
-
-// //DELETE ROUTE
-app.delete("/managefloor/:id",async(req,res)=>{
-  let {id}=req.params;
-  const floor = await Floor.findById(id);
-  let deletefloor= await Floor.findByIdAndDelete(id);
-  // console.log(deletedMember);
+// // DELETE FLOOR /////////////////////////////////////////
+// // //DELETE ROUTE
+// app.delete("/managefloor/:id",async(req,res)=>{
+//   let {id}=req.params;
+//   const floor = await Floor.findById(id);
+//   let deletefloor= await Floor.findByIdAndDelete(id);
+//   // console.log(deletedMember);
   
-  res.redirect("/managefloor");
-})
+//   res.redirect("/managefloor");
+// })
 
 
  
@@ -465,8 +524,7 @@ app.get("/activeMember/:id", async (req, res) => {
         newMember.payments.push(newPayment._id);
         // ✅ Step 6: Save member
         await newMember.save();
-          
-     
+           
       res.redirect("/newAdded/succesfully");
       console.log("✅ New member and payment added:",newMember, newPayment);
       console.log(room.occupied_beds);
