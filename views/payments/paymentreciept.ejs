@@ -76,7 +76,8 @@
               Paid Amount: ₹<%=payment.amountPaid.toLocaleString()%>%0A
               Payment Mode: <%= payment.paymentMode%>%0A
               Date of Payment: <%= new Date(payment.paymentDate).toLocaleDateString('en-GB')%>%0A
-              Thank you for your payment! - Hostel Management" 
+              Thank you for your payment! - <%=user.name%> (  Hostel Management )  %0A
+              'presentby &copy;HostelNode'" 
                       target="_blank" 
                       class="btn btn-outline"> 
                       <i class="fa-solid fa-share"></i> Send Receipt

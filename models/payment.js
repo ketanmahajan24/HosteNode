@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const paymentSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },  // Link to manager
+ user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", // This references the User collection
+        // required: true,
+    },
   memberId: { 
     type: mongoose.Schema.Types.ObjectId,  
     ref: "Member", 

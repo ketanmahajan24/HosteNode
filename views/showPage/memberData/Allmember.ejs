@@ -3,7 +3,7 @@
 <h3 class="revenue-heading">All Members</h3>
 
 <div class="table-container">
-  <form action="/member/search" method="post">
+  <form action="/user/member/search" method="post">
     <div class="row" >
       <div class="col-7" style="margin-left: 20px;">
           <input name="name" type="text" class="form-control" id="validationCustom01" maxlength="16" placeholder="Enter Name or Mobile"  required>
@@ -59,9 +59,9 @@
 
 
             <!-- <td><a style="color:  #293042;" href="/members/<%=Member._id%>/addpayment"> <button class="btn btn-info" type="submit"><i class="fa-solid fa-location-arrow"></i>Pay</button></a></td> -->
-            <td><a style="color:  #293042;" href="/member-edit/<%=Member._id%>/edit"><i class="fa-solid fa-pen-to-square"></i></a></td>
+            <td><a style="color:  #293042;" href="/user/member-edit/<%=Member._id%>/edit"><i class="fa-solid fa-pen-to-square"></i></a></td>
             <td>
-                <form method="POST" action="/member/<%=Member._id%>?_method=DELETE">
+                <form method="POST" action="/user/member/<%=Member._id%>?_method=DELETE">
                     <button class="btn p-0 border-0 bg-transparent"><i class="fa-solid fa-trash-can"></i></button>
                 </form>
             </td>

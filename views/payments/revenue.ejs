@@ -7,7 +7,7 @@
                 <div class="card card-2" style="background-color: aqua;">
                         <div class="row m-1"  >
                                 <span class="col-9"  style="justify-content: center; text-align: left; color: black;">
-                                        <h1 > 65  <i class="fa-solid fa-percent"></i></h1>
+                                        <h1 > <%= feesCollectionCompleted %> <i class="fa-solid fa-percent"></i></h1>
                                         <h5>Fees Collection Completed</h5>
                                 </span>
                                 <span class="col-2" >
@@ -21,7 +21,7 @@
                 <div class="card card-2" style="background-color: aqua;">
                         <div class="row m-1"  >
                                 <span class="col-9"  style="justify-content: center; text-align: left; color: black;">
-                                        <h5 > Paid A/C: 50  <HR></HR> Due A/C:  65   </h5>
+                                        <h5 > Paid A/C: <%= paidAccounts %>  <HR></HR> Due A/C: <%= dueAccounts %>  </h5>
                                 </span>
                                 <span class="col-2" >
                                         <i class="fa-solid fa-square-poll-horizontal" style="color: #ffffff;font-size: 30px; background-color:  #000; padding: 20px; border-radius: 50%; justify-items: center;"></i>
@@ -36,7 +36,7 @@
                 <div class="card card-3">
                         <div class="row m-1"  >
                                 <span class="col-9"  style="justify-content: center; text-align: left;">
-                                        <h2> <i class="fa-solid fa-indian-rupee-sign"></i> 8,00,000</h2>
+                                        <h2> <i class="fa-solid fa-indian-rupee-sign"></i><%= totalFeesCollected %></h2>
                                         <h5>Total Fees Collected</h5>
                                 </span>
                                 <span class="col-2" >
@@ -48,7 +48,7 @@
                 <div class="card card-6">
                         <div class="row m-1"  >
                                 <span class="col-9"  style="justify-content: center; text-align: left;">
-                                        <h2> <i class="fa-solid fa-indian-rupee-sign"></i> 2,00,000</h2>
+                                        <h2> <i class="fa-solid fa-indian-rupee-sign"></i>  <%= totalPendingAmount %></h2>
                                         <h5>Total Pending Amount</h5>
                                 </span>
                                 <span class="col-2" >
@@ -61,7 +61,7 @@
                 <div class="card card-4">
                         <div class="row m-1"  >
                                 <span class="col-9"  style="justify-content: center; text-align: left;">
-                                        <h2> <i class="fa-solid fa-indian-rupee-sign"></i> 10,00,000</h2>
+                                        <h2> <i class="fa-solid fa-indian-rupee-sign"></i><%= totalExpectedRevenue %></h2>
                                         <h5>Total Expected Revenue</h5>
                                 </span>
                                 <span class="col-2" >
@@ -75,7 +75,7 @@
                 <div class="card card-5">
                         <div class="row m-1"  >
                                 <span class="col-9"  style="justify-content: center; text-align: left;">
-                                        <h2> <i class="fa-solid fa-indian-rupee-sign"></i> 8,00,000</h2>
+                                        <h2> <i class="fa-solid fa-indian-rupee-sign"></i>  <%= balance %></h2>
                                         <h5>Balance</h5>
                                 </span>
                                 <span class="col-2" >

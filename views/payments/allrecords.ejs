@@ -3,7 +3,7 @@
 <br><br>
 <h3 class="revenue-heading">All Members Fees Records</h3>
 <div class="table-container">
-  <form action="/searchfeesrecords" method="post">
+  <form action="/user/searchfeesrecords" method="post">
     <div class="row">
       <div class="col-7" style="margin-left: 20px;">
           <input name="searchQuery" type="text" class="form-control" id="validationCustom01" maxlength="16" placeholder="Enter Name or Mobile"  required>
@@ -62,9 +62,9 @@
           <td style="background-color: <%= member.dueAmount === 0 ? 'rgba(60, 255, 0, 0.322)' : 'rgba(255, 0, 0, 0.445)' %>;">
             <%= member.dueAmount === 0 ? "Paid" : "Pending" %>
           </td>
-          <td><a style="color:  #293042;" href="/members/<%=member._id%>/addpayment"> <button class="btn btn-info" type="submit"><i class="fa-solid fa-location-arrow"></i>  Pay </button> </a> </td>
+          <td><a style="color:  #293042;" href="/user/members/<%=member._id%>/addpayment"> <button class="btn btn-info" type="submit"><i class="fa-solid fa-location-arrow"></i>  Pay </button> </a> </td>
           <td>
-            <a href="/payment-history/<%= member._id %>" class="btn btn-info btn-sm">
+            <a href="/user/payment-history/<%= member._id %>" class="btn btn-info btn-sm">
               <i class="fa-solid fa-clock-rotate-left"></i> History
             </a>
           </td>

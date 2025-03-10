@@ -10,14 +10,14 @@
         </div>
         <!-- "<Back" Button-->
         <div class="col-6">
-            <a href="/members" style="color: #021e2b;" class="col-12 btn"> <i class="fa-solid fa-chevron-left"></i> Back </a>
+            <a href="/user/members" style="color: #021e2b;" class="col-12 btn"> <i class="fa-solid fa-chevron-left"></i> Back </a>
         </div>
     </div>
     <hr>
 
     <div class="container student-box">
         <!-- Form starts here -->
-        <form method="POST" action="/member-edit/<%=allMembers._id%>?_method=PUT" class="row g-4 needs-validation" enctype="application/x-www-form-urlencoded">
+        <form method="POST" action="/user/member-edit/<%=allMembers._id%>?_method=PUT" class="row g-4 needs-validation" enctype="application/x-www-form-urlencoded">
 
             <div class="col-md-4">
                 <label for="name" class="form-label">Name</label>

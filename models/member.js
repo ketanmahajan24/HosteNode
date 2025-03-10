@@ -3,7 +3,11 @@ const Schema=mongoose.Schema;
 
 
 const memberSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },  // Link to manager
+   user: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User", // This references the User collection
+          required: true,
+      },
     assignedRoom_id: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Room" 

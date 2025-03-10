@@ -17,10 +17,10 @@
         <td><%=Room.room_fees%> </td>
         <td><%=Room.sharing_capacity%></td>
 
-        <td> <a style="color:  #293042;" href="/managerooms/<%=Room._id%>/edit"> <i class="fa-solid fa-pen-to-square"></i></a></td>
+        <td> <a style="color:  #293042;" href="/user/managerooms/<%=Room._id%>/edit"> <i class="fa-solid fa-pen-to-square"></i></a></td>
 
         <td>
-            <form method="POST" action="/managerooms/<%=Room._id%>?_method=DELETE">
+            <form method="POST" action="/user/managerooms/<%=Room._id%>?_method=DELETE">
                 <button class="btn p-0 border-0 bg-transparent"><i class="fa-solid fa-trash-can"></i></button>
             </form>
         </td>
