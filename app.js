@@ -97,11 +97,11 @@ app.post('/user/login', (req, res) => {
 // app.use(new LocalStrategy(async (username,password)))
 //Part-1 Render 1st home Page- """Dashboard"""////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// from dashboaard.ejs ////////////////////////////////////////////////////////
-// app.get("/",jwtAuthMiddleware,async(req,res)=>{
-//   // const { username, password } = req.query;
-//   // console.log(username,password);
-//   res.render("dashboard.ejs"); 
-// });  
+app.get("/",async(req,res)=>{
+  // const { username, password } = req.query;
+  // console.log(username,password);
+  res.send("user");
+});  
 
 ////////////// """"Signup""""""//""""Login""""/////////////////////////////////////
 
