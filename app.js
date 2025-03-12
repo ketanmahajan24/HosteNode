@@ -64,6 +64,71 @@ const Payment = require("./models/payment.js"); // Payment SCHEMA
 const User = require('./models/user.js'); 
 
 
+//FEES RENEVAL //////////////////////////////////////////////////////////////////////
+
+
+const cron = require("node-cron");
+const moment = require("moment");
+// const Member = require("./models/Member");  
+// const Payment = require("./models/Payment");  
+// const Room = require("./models/Room"); // Import Room model
+
+// Run every day at midnight (00:00)
+cron.schedule("46 15 * * *", async () => {
+  console.log("🔄 Running Monthly Fee Check at 3:30 PM...");
+     
+    try {
+        const today = moment().startOf("day"); // Get today's date
+        const members = await Member.find({ status: "Active" }); // Get all members
+
+        for (let member of members) {
+            const joiningDate = moment(member.joiningDate).startOf("day");
+
+            // ✅ Check if today matches the joining date of any month
+            if (joiningDate.date() === today.date()) {
+                console.log(`✅ Generating fees for: ${member.name}`);
+
+                // ✅ Step 1: Find the assigned room
+                const room = await Room.findById(member.assignedRoom_id); 
+                if (!room) {
+                    console.log(`❌ Room not found for ${member.name}`);
+                    continue;
+                }
+
+                // ✅ Step 2: Create a new payment record with room fees
+                const newPayment = new Payment({
+                    memberId: member._id,
+                    roomId: room._id,
+                    roomFees: room.room_fees, // Fetch fee from the room
+                    totalFees: room.room_fees, // Full month fee
+                    advancedPaid: 0,
+                    amountPaid: 0,
+                    dueAmount: room.room_fees, // Due amount
+                    status: "Due",
+                    paymentDate: new Date() // Today's date
+                });
+
+                await newPayment.save();
+                member.payments.push(newPayment._id); // Link payment to member
+                await member.save();
+
+                console.log(`💰 New Payment Added for ${member.name} on ${today.format("YYYY-MM-DD")}`);
+            }
+        }
+
+    } catch (err) {
+        console.error("❌ Error in Monthly Fee Processing:", err);
+    }
+});
+
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 const ejsMate=require("ejs-mate");//require ejs-Mate for boilerplate
 
  
@@ -100,7 +165,8 @@ app.post('/user/login', (req, res) => {
 app.get("/",async(req,res)=>{
   // const { username, password } = req.query;
   // console.log(username,password);
-  res.send("user");
+//   res.send("user");
+res.render("lendingPage.ejs")
 });  
 
 ////////////// """"Signup""""""//""""Login""""/////////////////////////////////////
@@ -112,6 +178,11 @@ app.get("/signup",(req,res)=>{
 app.get("/login",(req,res)=>{
   res.render("authPrivate/login.ejs");
 })
+
+
+
+
+
 
 // FLOORS////////////////////////////////////////////////////////////////////////////////////////////////
     // // View all Floors

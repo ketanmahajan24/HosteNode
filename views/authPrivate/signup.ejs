@@ -1,66 +1,180 @@
- <!DOCTYPE html>
- <html lang="en">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup - HoselNode </title>
-    <link rel="icon" type="image/jpg" href="/images/hostel_icon.jpg">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- <link rel="stylesheet" href="/css/style.css"> -->
-<!-- GOOGLE FONTS -->
-<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Montserrat+Subrayada:wght@400;700&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet"> 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/authStyle.css">
- </head>
- <body>
-       <!-- <div class="sign-box"> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Signup - HostelNode</title>
+   <link rel="icon" type="image/jpg" href="/images/hostel_icon.jpg">
+   
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+   
+   <!-- Font Awesome (using solid icons) -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+         crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+   <!-- Google Fonts -->
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   
+   <style>
+      body {
+         background: linear-gradient(135deg, #6a11cb, #2575fc);
+         font-family: 'Poppins', sans-serif;
+         height: 100vh;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         color: white;
+      }
+      
+      .sign-box {
+         background: rgba(255, 255, 255, 0.15);
+         backdrop-filter: blur(12px);
+         border-radius: 15px;
+         padding: 30px;
+         width: 100%;
+         max-width: 450px;
+         box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.3);
+         color: white;
+         animation: fadeIn 1s ease-in-out;
+      }
+      
+      @keyframes fadeIn {
+         from { opacity: 0; transform: translateY(-20px); }
+         to { opacity: 1; transform: translateY(0); }
+      }
+      
+      .signup-heading {
+         font-weight: 600;
+         font-size: 24px;
+         margin-bottom: 10px;
+      }
+      
+      .tagline {
+         font-size: 16px;
+         font-weight: 400;
+         opacity: 0.8;
+         margin-bottom: 20px;
+      }
+      
+      .form-label {
+         font-weight: 500;
+      }
+      
+      .form-control {
+         border-radius: 8px;
+         padding: 10px;
+         border: none;
+         outline: none;
+         transition: 0.3s ease-in-out;
+         width: 100%;
+      }
+      
+      .form-control:focus {
+         box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.4);
+         transform: scale(1.02);
+      }
+      
+      .password-container {
+         position: relative;
+         display: flex;
+         align-items: center;
+      }
+      
+      .eye-icon {
+         position: absolute;
+         right: 15px;
+         top: 50%;
+         transform: translateY(-50%);
+         cursor: pointer;
+         color: #aaa;
+         transition: 0.3s ease;
+      }
+      
+      .eye-icon:hover {
+         color: white;
+      }
+      
+      .signup-btn {
+         background: #ff8c00;
+         color: white;
+         font-weight: 600;
+         width: 100%;
+         padding: 12px;
+         border-radius: 8px;
+         transition: 0.3s ease-in-out;
+         margin-top: 10px;
+      }
+      
+      .signup-btn:hover {
+         background: #e67e22;
+         transform: scale(1.05);
+      }
+      
+      hr {
+         border: 1px solid rgba(255, 255, 255, 0.2);
+         margin: 20px 0;
+      }
+   </style>
+</head>
+<body>
 
-        <br><br>
-    <div class="container sign-box">
-<h1 class="singup-heading">Get Start <br> Lets... Signup </h1>
-<hr>
-        <form method="POST" action="/user/signup" class="row g-4 needs-validation">
-             
-            
-            <div class="col-12">
-                <label for="validationCustom02" class="form-label">Name</label>
-                <input type="text" name="user[name]" class="form-control" required>
+   <div class="container sign-box">
+      <h2 class="signup-heading">Welcome to <span style="color: #ffcc00;">HostelNode</span> 🚀</h2>
+      <p class="tagline">Your Smart Hostel Management Solution</p>
+      <hr>
+      
+      <form method="POST" action="/user/signup" class="row g-3 needs-validation">
+         
+         <div class="col-12">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" name="user[name]" id="name" class="form-control" required placeholder="Enter your name">
+         </div>
+         
+         <div class="col-12">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" name="user[email]" id="email" class="form-control" required placeholder="Enter your email">
+         </div>
+         
+         <div class="col-12">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="user[username]" id="username" class="form-control" maxlength="10" required placeholder="Create a username">
+         </div>
+         
+         <div class="col-12">
+            <label for="password" class="form-label">Password</label>
+            <div class="password-container">
+               <input type="password" name="user[password]" id="password" class="form-control" maxlength="8" required placeholder="Create a password">
+               <i class="fa-solid fa-eye eye-icon" id="togglePassword"></i>
             </div>
-            
-            <div class="col-12">
-                <label for="validationCustom03" class="form-label">Email </label>
-                <input type="email" name="user[email]" class="form-control" required>
-            </div>
-            
-            <div class="col-12">
-                <label for="validationCustom04" class="form-label">Username</label>
-                <input type="text" name="user[username]" class="form-control" maxlength="10" required>
-            </div>
-            
-            <div class="col-12">
-                <label for="validationCustom05" class="form-label">Password</label>
-                <input type="password" name="user[password]" class="form-control" maxlength="8" required>
-            </div>
-            
-            <div class="col-12" style="display: flex;">
-                <button type="submit" class="btn signup-btn"> Sign up </button>
-            </div>        
-            
-        </form>
-    </div>
+         </div>
+         
+         <div class="col-12">
+            <button type="submit" class="btn signup-btn">Sign Up</button>
+         </div>
+         
+      </form>
+   </div>
 
-       </div>
- </body>
- </html>
+   <!-- JavaScript for Show/Hide Password Functionality -->
+   <script>
+      const passwordInput = document.getElementById("password");
+      const togglePassword = document.getElementById("togglePassword");
+      
+      togglePassword.addEventListener("click", function() {
+         if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            togglePassword.classList.remove("fa-eye");
+            togglePassword.classList.add("fa-eye-slash");
+         } else {
+            passwordInput.type = "password";
+            togglePassword.classList.remove("fa-eye-slash");
+            togglePassword.classList.add("fa-eye");
+         }
+      });
+   </script>
+   
+</body>
+</html>

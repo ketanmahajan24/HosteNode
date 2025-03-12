@@ -8,11 +8,11 @@ const memberSchema = new mongoose.Schema({
           ref: "User", // This references the User collection
           required: true,
       },
-    assignedRoom_id: {
+    assignedRoom_id:{
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Room" 
-    }, // Linking to Room
-    name:{ type: String, 
+    }, // Linking to Room 
+    name:{ type: String,
         required: true 
     },
     fatherName: { 
@@ -20,11 +20,11 @@ const memberSchema = new mongoose.Schema({
     },
     mobileNo: { type: String,
         required: true ,
-        unique: true 
+        // unique: true 
     },
     aadharNo: { 
         type: String, 
-        unique: true 
+        // unique: true 
     },
     address: { 
         type: String 

@@ -46,8 +46,9 @@ router.post('/signup', async (req, res) => {
         console.log(JSON.stringify(payload));
         const token=generateToken(payload);
         // console.log("Token is : ",token)
-
-        res.status(200).json({response:response,token:token});
+        res.redirect('/login');
+        // res.status(200).json({response:response,token:token});
+        
     }
     catch (err) {
         console.log(err);
@@ -93,54 +94,109 @@ router.post('/login', async(req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
- 
+
+
 // GET method to get the dashboard data
 router.get('/', jwtAuthMiddleware, async (req, res) => {
-    try {
-        const userId = req.user.id;
+  try {
+      const userId = req.user.id; // This is your user ID from the token
+      const user = await User.findById(userId);
 
-        // Fetch all rooms related to the logged-in user
-        const rooms = await Room.find({ user: userId });
-        const floors = await Floor.find({ user: userId });
+      // ✅ Fetch all rooms, floors, and members related to the logged-in user
+      const rooms = await Room.find({ user: userId });
+      const floors = await Floor.find({ user: userId });
 
-        // Fetch all students (members) in the hostel
-        const members = await Member.find({ user: userId });
+      // ✅ Fetch all members with payments populated
+      const members = await Member.find({ user: userId })
+          .populate("payments")
+          .exec();
 
-        // ✅ Calculate Total Beds
-        const totalBeds = rooms.reduce((sum, room) => sum + room.sharing_capacity, 0);
+      // ✅ Calculate Total Beds
+      const totalBeds = rooms.reduce((sum, room) => sum + room.sharing_capacity, 0);
 
-        // ✅ Calculate Available Beds
-        const availableBeds = totalBeds - rooms.reduce((sum, room) => sum + room.occupied_beds, 0);
+      // ✅ Calculate Available Beds
+      const availableBeds = totalBeds - rooms.reduce((sum, room) => sum + room.occupied_beds, 0);
 
-        // ✅ Calculate Booked Rooms
-        const bookedRooms = rooms.filter(room => room.occupied_beds > 0).length;
+      // ✅ Calculate Booked Rooms
+      const bookedRooms = rooms.filter(room => room.occupied_beds > 0).length;
 
-        // ✅ Calculate Total Rooms
-        const totalRooms = rooms.length;
+      // ✅ Calculate Total Rooms
+      const totalRooms = rooms.length;
 
-        // ✅ Calculate Total Students
-        const totalStudents = members.length;
+      // ✅ Calculate Total Students
+      const totalStudents = members.length;
 
-        // ✅ Calculate Total Pending Amount
-        const totalPendingAmount = members.reduce((sum, member) => sum + (member.pending_amount || 0), 0);
+      // ✅ Calculate Revenue from Payments (Dynamically)
+      let totalExpectedRevenue = 0;
+      let totalFeesCollected = 0;
+      let totalPendingAmount = 0;
+      let totalAdvancedPaid = 0;
+      let paidAccounts = 0;
+      let dueAccounts = 0;
 
-        // ✅ Render the dashboard.ejs file
-        res.status(200).render('dashboard.ejs', {
-            user: req.user,
-            availableBeds,
-            totalBeds,
-            bookedRooms,
-            totalRooms,
-            totalStudents,
-            totalPendingAmount
-        });
+      members.forEach(member => {
+          // ✅ Total Room Fees for Member
+          const totalRoomFees = member.payments.reduce((sum, payment) => sum + (payment.roomFees || 0), 0);
 
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+          // ✅ Total Amount Paid for Member
+          const totalPaid = member.payments.reduce((sum, payment) => sum + (payment.amountPaid || 0), 0);
+
+          // ✅ Calculate Due Amount (if paid amount < room fees)
+          const dueAmount = totalRoomFees - totalPaid;
+
+          // ✅ Calculate Advanced Paid Amount (if paid amount > room fees)
+          const advancedPaid = totalPaid > totalRoomFees ? totalPaid - totalRoomFees : 0;
+
+          // ✅ Track Revenue Data
+          totalExpectedRevenue += totalRoomFees;
+          totalFeesCollected += totalPaid;
+          totalPendingAmount += dueAmount > 0 ? dueAmount : 0;
+          totalAdvancedPaid += advancedPaid > 0 ? advancedPaid : 0;
+
+          // ✅ Count Paid and Due Accounts
+          if (totalPaid >= totalRoomFees) {
+              paidAccounts++;
+          } else {
+              dueAccounts++;
+          }
+      });
+      
+      // ✅ Calculate Collection Percentage
+      let feesCollectionCompleted = totalExpectedRevenue > 0
+          ? ((totalFeesCollected / totalExpectedRevenue) * 100).toFixed(2)
+          : 0;
+
+      // ✅ Format Numbers in Indian Currency without Decimal (.00)
+      const formatCurrency = (amount) => {
+          return new Intl.NumberFormat("en-IN", {
+              minimumFractionDigits: 0,   // ✅ Removed .00 (No decimal)
+              maximumFractionDigits: 0    // ✅ Removed .00 (No decimal)
+          }).format(amount);
+      };
+
+      // ✅ Render the dashboard.ejs file
+      res.status(200).render('dashboard.ejs', {
+          user,
+          availableBeds,
+          totalBeds,
+          bookedRooms,
+          totalRooms,
+          totalStudents,
+          totalPendingAmount: formatCurrency(totalPendingAmount),
+          totalAdvancedPaid: formatCurrency(totalAdvancedPaid),
+          totalFeesCollected: formatCurrency(totalFeesCollected),
+          totalExpectedRevenue: formatCurrency(totalExpectedRevenue),
+          balance: formatCurrency(totalExpectedRevenue - totalFeesCollected),
+          feesCollectionCompleted,
+          paidAccounts,
+          dueAccounts
+      });
+
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
-  
 router.get("/profile",jwtAuthMiddleware,async(req,res)=>{
     try{
         userData=req.user;
@@ -528,9 +584,7 @@ router.get("/profile",jwtAuthMiddleware,async(req,res)=>{
     //  console.log(room)
     // Update the floor's total_rooms
     await Floor.findByIdAndUpdate(room.floor_id, { $inc: { active_number: -1,occupied_beds:-1 } });
-   
-   
-      
+
       // ✅ Redirect or Respond
       res.redirect("/user/members"); // Redirect to members list or member details page
     } catch (error) {
@@ -539,11 +593,8 @@ router.get("/profile",jwtAuthMiddleware,async(req,res)=>{
     }
   });
   // 
-  
    
-  
-  
-      // Add New Member
+    // Add New Member
       router.get("/newmember", jwtAuthMiddleware,async(req,res)=>{
 
         const userId = req.user.id; // This is your user ID from the token
@@ -552,7 +603,7 @@ router.get("/profile",jwtAuthMiddleware,async(req,res)=>{
         const rooms= await Room.find({ user: userId });
         const floors = await Floor.find({ user: userId });
         
-          res.render("showPage/memberData/newmember.ejs",{rooms,floors,user});
+          res.render("showPage/memberData/newmember.ejs",{rooms,floors,user}); 
       })
        // Taking input values from student-new.ejs // route ->{"/admin/students/new"}
        router.post("/newMember", jwtAuthMiddleware, async (req, res) => {
@@ -568,6 +619,20 @@ router.get("/profile",jwtAuthMiddleware,async(req,res)=>{
           // ✅ Step 1: Find the room
           const room = await Room.findById(assignedRoom_id);
           if (!room) return res.status(404).send("Error: ROOM not found.");
+         
+          // ✅ Step 2: Check for duplicate Mobile Number
+          const existingMobile = await Member.findOne({ mobileNo, user: userId });
+          if (existingMobile) {
+            return res.status(400).send(`<h1>Mobile Number ${mobileNo} already exists for your account. Try with another Mobile Number....!</h1>`);
+          }
+
+          // ✅ Step 3: Check for duplicate Aadhar Number
+          const existingAadhar = await Member.findOne({ aadharNo, user: userId });
+          if (existingAadhar) {
+            return res.status(400).send(`<h1>Aadhar Number ${aadharNo} already exists for your account. Try with another Aadhar Number....!</h1>`);
+          }
+
+          
           // ✅ Step 2: Create new member
           const newMember = new Member({
             user: userId,
@@ -611,6 +676,7 @@ router.get("/profile",jwtAuthMiddleware,async(req,res)=>{
         res.redirect("/user/newAdded/succesfully");
         console.log("✅ New member and payment added:",newMember, newPayment);
         console.log(room.occupied_beds);
+        console.log(newPayment)
             if (room.sharing_capacity === room.occupied_beds + 1) {
               console.log(room.occupied_beds);
               console.log("************************** Room Fulled *****************************");
@@ -763,7 +829,7 @@ router.get("/profile",jwtAuthMiddleware,async(req,res)=>{
      
        // If no matching member is found
        if (members.length === 0) {
-         return res.render("showPage/memberData/searchedNotFoundMember.ejs", { 
+         return res.render("showPage/memberData/searchedNotFoundMember.ejs", { user: user,
            errorMessage: "Member NOT FOUND" 
          });
        }
@@ -833,14 +899,14 @@ router.get("/profile",jwtAuthMiddleware,async(req,res)=>{
         const user= await User.findById(userId)
       
        const searchQuery = req.body.searchQuery; // input from form (name or mobile number)
-   
-       const filteredMembers = await Member.find({
-         $or: [
-           { name: { $regex: searchQuery, $options: "i" } }, // Case-insensitive name search
-           { mobileNo: searchQuery } // Exact match for mobile number
-         ]
-       }).populate("payments");
-   
+       const filteredMembers = await Member.find({ 
+        user: req.user.id, // Filter by userId
+        $or: [
+          { name: { $regex: searchQuery, $options: "i" } }, // Case-insensitive name search
+          { mobileNo: searchQuery } // Exact match for mobile number
+        ]
+      }).populate("payments");
+      
        const membersWithFees = filteredMembers.map((member) => {
          // Calculate totalFees (sum of roomFees)
          const totalFees = member.payments.reduce((sum, payment) => sum + (payment.roomFees || 0), 0);
@@ -865,6 +931,7 @@ router.get("/profile",jwtAuthMiddleware,async(req,res)=>{
          return res.render("payments/allrecordsNotFound.ejs", {
            allMembers: [],
            errorMessage: "No records found for the search query.",
+           user,
          });
        }
    
@@ -933,13 +1000,10 @@ router.get("/upcomingPayments",jwtAuthMiddleware, async (req, res) => {
        res.status(500).send("Internal Server Error");
      }
    });
+   
    //SHOW DUE AMOUNT//////////////////////////////////////
-   
-   
-   
    router.get("/deureports",jwtAuthMiddleware,async(req,res)=>{
     
-   
    try {
       
     const userId = req.user.id; // This is your user ID from the token
@@ -959,7 +1023,7 @@ router.get("/upcomingPayments",jwtAuthMiddleware, async (req, res) => {
        // Calculate dueAmount based on totalFees
        const dueAmount = amountPaid >= totalFees ? 0 : totalFees - amountPaid;
        const advancedPaid = amountPaid > totalFees ? amountPaid - totalFees : 0;
-   
+
        return {
          ...member.toObject(),
          totalFees,
@@ -984,7 +1048,7 @@ router.get("/upcomingPayments",jwtAuthMiddleware, async (req, res) => {
   
     
 // =================== REVENUE ROUTE ===================
-router.get("/revenue", jwtAuthMiddleware, async (req, res) => {
+router.get("/revenue", jwtAuthMiddleware, async (req, res) =>{
     try {
         const userId = req.user.id;
         const user = await User.findById(userId);
@@ -1062,8 +1126,6 @@ router.get("/revenue", jwtAuthMiddleware, async (req, res) => {
         // ✅ Format Numbers in Indian Currency without Decimal (.00)
         const formatCurrency = (amount) => {
             return new Intl.NumberFormat("en-IN", {
-                style: "currency",
-                currency: "INR",
                 minimumFractionDigits: 0,   // ✅ Removed .00 (No decimal)
                 maximumFractionDigits: 0    // ✅ Removed .00 (No decimal)
             }).format(amount);

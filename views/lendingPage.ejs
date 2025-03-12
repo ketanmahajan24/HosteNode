@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HostelNode - Smart Hostel Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 50px 20px;
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .buttons {
+            margin-top: 30px;
+        }
+        .btn {
+            display: inline-block;
+            background: #ff7e5f;
+            padding: 15px 40px;
+            margin: 10px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(255, 126, 95, 0.4);
+        }
+        .feature-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 15px;
+            width: 300px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            transition: 0.3s;
+            animation: slideUp 1.5s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+        .card h3 {
+            font-size: 1.6rem;
+        }
+        .card p {
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to HostelNode</h1>
+        <p>Smart Hostel Management Software to automate room allocation, fee tracking, and reporting.</p>
+        <div class="buttons">
+            <a href="/login" class="btn">Login</a>
+            <a href="/signup" class="btn">Sign Up</a>
+        </div>
+        <div class="feature-cards">
+            <div class="card">
+                <h3>Room & Bed Management</h3>
+                <p>Easily assign and manage hostel rooms and beds.</p>
+            </div>
+            <div class="card">
+                <h3>Automated Fee Tracking</h3>
+                <p>Generate invoices and send reminders automatically.</p>
+            </div>
+            <div class="card">
+                <h3>Real-time Reporting</h3>
+                <p>Monitor occupancy, revenue, and pending dues.</p>
+            </div>
+            <div class="card">
+                <h3>Multi-Hostel Support</h3>
+                <p>Manage multiple hostels from a single dashboard.</p>
+            </div>
+            <div class="card">
+                <h3>User Roles & Security</h3>
+                <p>Role-based access control for admins and staff.</p>
+            </div>
+            <div class="card">
+                <h3>Automated Notifications</h3>
+                <p>Send fee reminders and important updates via email/SMS.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
