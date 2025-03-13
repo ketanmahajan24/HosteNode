@@ -15,7 +15,7 @@ app.use(cookieParser()); // ✅ Use cookie-parser to parse cookies
 
 
 app.use(cors({
-    origin: 'http://localhost:8080', // Your frontend URL
+    origin: 'http://localhost:5000', // Your frontend URL
     credentials: true // ✅ Allow cookies to be sent
 }));
 
