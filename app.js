@@ -52,7 +52,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(bodyParser.json()); // for parsing application/json
 
-let port=process.env.PORT;
+let PORT=process.env.PORT;
  
 // ///////////////////////////////////////////
 // SCHEMA CONNECTIN $ REQUIRE 
@@ -920,10 +920,7 @@ app.get("/login",(req,res)=>{
 
 
 
-
-
-
-
+ 
 
 
 
@@ -932,6 +929,6 @@ app.get("/login",(req,res)=>{
 // })
 
 
-app.listen(8080,()=>{
-    console.log("Server is Listening on port 8080");
+app.listen(PORT,()=>{
+    console.log(`Server is Listening on port {PORT}`);
 });
