@@ -930,5 +930,5 @@ app.get("/login",(req,res)=>{
 
 
 app.listen(PORT,()=>{
-    console.log(`Server is Listening on port {PORT}`);
+    console.log(`Server is Listening on port ${PORT}`);
 });
