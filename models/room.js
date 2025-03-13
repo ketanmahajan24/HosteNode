@@ -11,7 +11,6 @@ const roomSchema = new mongoose.Schema({
     floor_name: {
         type: String,
         // required: true,
-    
     },
   room_number: {
     type: String,

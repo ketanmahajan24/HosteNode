@@ -11,7 +11,6 @@ const floorSchema = new Schema({
     floor_name: {
         type: String,
         required: true,
-        // unique: true ,
     },
     total_rooms: {
         type: Number,
