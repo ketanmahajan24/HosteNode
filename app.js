@@ -124,11 +124,7 @@ cron.schedule("46 15 * * *", async () => {
 
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const {checkAdminCredentials}=require('./adminmidlware.js') 
-
-
-
-
+  
 
 const ejsMate=require("ejs-mate");//require ejs-Mate for boilerplate
 
@@ -925,6 +921,9 @@ app.get("/loginforadmin",(req,res)=>{
 
 
 
+
+
+
  
 app.post('/admin-login', async (req, res) => {
     try {
@@ -950,17 +949,15 @@ app.post('/admin-login', async (req, res) => {
         // Successful login, redirect to admin dashboard
         // res.redirect('/ketanmahajan2408');
         const users = await User.find(); // Fetch all users
-        const admin = await Admin.findOne({ username: admin.username }); // Replace with actual logic
+        const isadmin = await Admin.findOne({ username: username }); // Replace with actual logic
        
-        res.render("superAdmin/admin", { users,admin}); // Pass users to EJS template
+        res.render("superAdmin/admin", { users,isadmin}); // Pass users to EJS template
 
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
-
 
 //Toggle user status (Active → Inactive)
 app.put("/dashboard/:id", async (req, res) => {
@@ -980,21 +977,16 @@ app.put("/dashboard/:id", async (req, res) => {
         await User.findByIdAndUpdate(userId, { status: newStatus });
 
         // Redirect back to dashboard
-        res.redirect("/ketanmahajan2408");
+        // res.redirect("#")
+    //    res.render("superAdmin/admin", { users,isadmin}); // Pass users to EJS template
+    res.send("STATUS IS UPDATED")
+
     } catch (error) {
         console.error("Error updating status:", error);
         res.status(500).send("Error updating user status");
     }
 });
-
-app.get("/ketanmahajan24082003",async (req, res) => {
-    try {
-    
-    } catch (error) {
-        res.status(500).send("Error fetching user data");
-    }
-});
-
+ 
 
 app.listen(PORT,()=>{
     console.log(`Server is Listening on port ${PORT}`);

@@ -129,23 +129,58 @@
     </style>
 </head>
 <body>
-
+    <nav  class="navbar navbar-dark fixed-top" style="background-color: rgb(12, 20, 24);">
+        <div class="container-fluid"> 
+      
+           
+          <span class="product-logo">
+            <img style="height: 2rem; border-radius: 50%;" src="/images/product_icon.jpg" alt="user img">
+             <a  class="navbar-brand montserrat-subrayada-regular" href="#" >HostelNode</a>
+          </span>
+           
+            <!-- PROFILE  -->
+            <!-- <button class="navbar-toggler" type="button"> -->
+              <img  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="height: 2rem; border-radius: 25%; margin-right: 1rem;" src="/images/ketan_passport_2025.jpg" alt="user img">
+            <!-- </button> -->
+            
+        </div>
+      </nav>
+      <br><br>
     <!-- Sidebar -->
     <div class="sidebar">
         <h2>Super Admin </h2>
         <ul>
             <li class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
-            <li><i class="fas fa-user"></i> <%=admin.username%></li>
-            <li><i class="fas fa-user"></i> <%=admin.email%></li>
+            <li><i class="fas fa-user"></i> <%=isadmin.username%></li>
+            <li><i class="fa-solid fa-phone"></i> <%=isadmin.phone%></li>
             <li><i class="fas fa-cogs"></i> Settings</li>
-            <li><i class="fas fa-sign-out-alt"></i> Logout </li>
+            <li onclick="signup()">
+                <i class="fa-solid fa-user-plus"></i> Signup
+            </li>
+            
+            <script>
+                function signup() {
+                    window.location.href = "/signup";
+                }
+            </script>
+            
+            <li onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </li>
+            
+            <script>
+                function logout() {
+                    window.location.href = "/login";
+                }
+            </script>
+            
         </ul>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
         <nav class="navbar">
-            <h4>HostelNode</h4>
+            <h3>Dashboard  of    - <%=isadmin.name%></h3>
             <button id="darkModeToggle" class="btn btn-dark"> <i class="fa-solid fa-circle-half-stroke"></i> </button>
         </nav>
 
@@ -189,7 +224,8 @@
                             <td><%= user.email %></td>
                             <td><%= user.phone %></td>
                             <td><%= user.hostelName %></td>
-                            <td><%= user.createdAt.toLocaleDateString() %></td>
+                            <td><%= user.createdAt.toLocaleString() %></td>
+
                             <td><%= user.status %></td>
                             <td>
                                 <form method="POST" action="/dashboard/<%=user._id%>?_method=PUT" class="row g-4 needs-validation" enctype="application/x-www-form-urlencoded">
