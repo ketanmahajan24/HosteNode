@@ -2,13 +2,19 @@ const mongoose = require('mongoose');
  
 const bcrypt = require('bcryptjs');
 
-// Define the User Schema
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, unique: true, required: true },
     username: { type: String, unique: true, required: true },
-    password: { type: String, required: true },  // Hashed password
+    password: { type: String, required: true }, // Hashed password
+    phone: { type: String, unique: true, required: true }, // Phone number
+    hostelName: { type: String, required: true }, // Hostel name
+
+    status: { type: String, enum: ['Active', 'Inactive'], default: 'Active' }, // Account status
+    createdAt: { type: Date, default: Date.now }, // Account creation date
+ 
 });
+
 
 // Hash the password before saving it to the database
 userSchema.pre('save', async function(next) {

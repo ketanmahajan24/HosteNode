@@ -21,7 +21,7 @@
       body {
          background: linear-gradient(135deg, #6a11cb, #2575fc);
          font-family: 'Poppins', sans-serif;
-         height: 100vh;
+         height:100%;
          display: flex;
          justify-content: center;
          align-items: center;
@@ -30,6 +30,8 @@
       }
       
       .sign-box {
+         margin: 50px 20px;
+         height: 100%;
          background: rgba(255, 255, 255, 0.15);
          backdrop-filter: blur(12px);
          border-radius: 15px;
@@ -126,6 +128,12 @@
       <p class="tagline">Your Smart Hostel Management Solution</p>
       <hr>
       
+      <% if (typeof error !== 'undefined') { %>
+         <div style="background-color: rgba(255, 0, 0, 0.788); color:rgb(255, 255, 255)" class=" alert alert-danger " role="alert">
+             <%= error %>
+         </div>
+     <% } %>
+ 
       <form method="POST" action="/user/signup" class="row g-3 needs-validation">
          
          <div class="col-12">
@@ -136,6 +144,16 @@
          <div class="col-12">
             <label for="email" class="form-label">Email Address</label>
             <input type="email" name="user[email]" id="email" class="form-control" required placeholder="Enter your email">
+         </div>
+            
+         <div class="col-12">
+            <label for="mobile" class="form-label">Mobile No.</label>
+            <input type="mobile" name="user[phone]" id="mobile" class="form-control" required placeholder="Enter your Mobile No.">
+         </div>
+            
+         <div class="col-12">
+            <label for="hmame" class="form-label">Hostel Name</label>
+            <input type="text" name="user[hostelName]" id="hname" class="form-control" required placeholder="Enter your Hostel Name">
          </div>
          
          <div class="col-12">

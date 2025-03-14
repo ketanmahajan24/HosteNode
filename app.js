@@ -62,6 +62,7 @@ const Room = require("./models/room.js"); // room SCHEMA
 const Member = require("./models/member.js"); // room SCHEMA
 const Payment = require("./models/payment.js"); // Payment SCHEMA
 const User = require('./models/user.js'); 
+const Admin = require('./models/admin.js'); 
 
 
 //FEES RENEVAL //////////////////////////////////////////////////////////////////////
@@ -123,7 +124,7 @@ cron.schedule("46 15 * * *", async () => {
 
 // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+const {checkAdminCredentials}=require('./adminmidlware.js') 
 
 
 
@@ -179,6 +180,10 @@ app.get("/login",(req,res)=>{
   res.render("authPrivate/login.ejs");
 })
 
+app.get("/loginforadmin",(req,res)=>{
+    res.render("authPrivate/login-admin.ejs");
+  })
+  
 
 
 
@@ -325,16 +330,16 @@ app.get("/login",(req,res)=>{
 //   });
  
 // BEDS//////////////////////////////////////////////////////////////////////////////////////////////////
-    //  Assing Bed to Room
-    app.get("/createbeds",(req,res)=>{
-        res.render("showPage/rooms/createBed.ejs")
-    })
-    app.get("/allbeds",(req,res)=>{
-        res.render("showPage/allbeds.ejs")
-    })
-    app.get("/avlbleBeds",(req,res)=>{
-    res.render("showPage/availablebeds.ejs");
-})
+//     //  Assing Bed to Room
+//     app.get("/createbeds",(req,res)=>{
+//         res.render("showPage/rooms/createBed.ejs")
+//     })
+//     app.get("/allbeds",(req,res)=>{
+//         res.render("showPage/allbeds.ejs")
+//     })
+//     app.get("/avlbleBeds",(req,res)=>{
+//     res.render("showPage/availablebeds.ejs");
+// })
 // // MEMBERS //////////////////////////////////////////////////////////////////////////////////////////////////
 //     // View all Members
 //     app.get ("/members",async (req,res)=>{
@@ -921,12 +926,74 @@ app.get("/login",(req,res)=>{
 
 
  
+app.post('/admin-login', async (req, res) => {
+    try {
+        const { username, password } = req.body.admin;
+
+        // Find the admin by username
+        const admin = await Admin.findOne({ username: username });
+
+        if (!admin) {
+            return res.render("authPrivate/login-admin.ejs", { error: "Invalid username or password" });
+        }
+
+        // Check if account is active
+        if (admin.status !== "Active") {
+            return res.render("authPrivate/login-admin.ejs", { error: "Account is inactive. Contact support." });
+        }
+
+        // Compare entered password with stored password
+        if (password !== admin.password) {
+            return res.render("authPrivate/login-admin.ejs", { error: "Invalid Password " });
+        }
+
+        // Successful login, redirect to admin dashboard
+        // res.redirect('/ketanmahajan2408');
+        const users = await User.find(); // Fetch all users
+        const admin = await Admin.findOne({ username: admin.username }); // Replace with actual logic
+       
+        res.render("superAdmin/admin", { users,admin}); // Pass users to EJS template
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 
 
-// app.get("/revenue",(req,res)=>{
-//     res.render("payments/revenue.ejs");
-// })
+//Toggle user status (Active → Inactive)
+app.put("/dashboard/:id", async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        // Find the user
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Toggle status
+        const newStatus = user.status === "Active" ? "Inactive" : "Active";
+
+        // Update status in the database
+        await User.findByIdAndUpdate(userId, { status: newStatus });
+
+        // Redirect back to dashboard
+        res.redirect("/ketanmahajan2408");
+    } catch (error) {
+        console.error("Error updating status:", error);
+        res.status(500).send("Error updating user status");
+    }
+});
+
+app.get("/ketanmahajan24082003",async (req, res) => {
+    try {
+    
+    } catch (error) {
+        res.status(500).send("Error fetching user data");
+    }
+});
 
 
 app.listen(PORT,()=>{

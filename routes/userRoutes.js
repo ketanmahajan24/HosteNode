@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const Admin = require("../models/admin.js"); // Floor SCHEMA
 const User = require('../models/user');  // Adjust path if necessary
+
 const {jwtAuthMiddleware,generateToken}=require('./../jwt.js') 
+
+ 
 
 
 
@@ -13,10 +17,11 @@ const Floor = require("../models/floor.js"); // Floor SCHEMA
 const Room = require("../models/room.js"); // room SCHEMA
 const Member = require("../models/member.js"); // room SCHEMA
 const Payment = require("../models/payment.js"); // Payment SCHEMA
+
 // const User = require('./models/user.js'); 
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////
-
+////// admin dashboard
 
 
 
@@ -24,12 +29,14 @@ const Payment = require("../models/payment.js"); // Payment SCHEMA
 // POST route to signup User
 router.post('/signup', async (req, res) => {
     try {
-        const {name,email,username,password} = req.body.user; // Assuming the request body contains the person data
+        const {name,email,phone,hostelName,username,password} = req.body.user; // Assuming the request body contains the person data
 
         // Create a new Person document using the Mongoose model
         const newUser = new User({
             name:name,
             email:email,
+            phone:phone,
+            hostelName:hostelName,
             username:username,
             password:password
         });
@@ -52,7 +59,7 @@ router.post('/signup', async (req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        return res.render("authPrivate/signup.ejs", { error: "An account with these details already exists.!" });
     }
 });
 
@@ -62,13 +69,13 @@ router.post('/login', async(req, res) => {
         // Extract username and password from request body
         const {username,password} = req.body.user;
 
-        // Find the user by username
-        const user = await User.findOne({username: username}); 
-
-        // If user does not exist or password does not match, return error
-        if (!user || !(await user.comparePassword(password))){
-            return res.status(401).json({error: 'Invalid username or password'});
+              // Find the user by username and check if status is "active"
+        const user = await User.findOne({ username: username, status: "Active" });
+        
+        if (!user) {
+          return res.render("authPrivate/login.ejs", { error: "Invalid username or password" });
         }
+
         // generate Token
         const payload = {
             id: user.id,
