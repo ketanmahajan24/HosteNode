@@ -235,20 +235,27 @@
                                 </form> 
                             </td>
                             <td>
-                                <a class="nav-link dropdown-item"   
-                                href="https://mail.google.com/mail/?view=cm&fs=1&to=hostelnodehelp@gmail.com&su=Support%20Request%20for%20HostelNode%20:<%= user.username %>&body=Hello%20Ketan,%0D%0A%0D%0A
-                                My%20Name:%20<%= user.name %>%0D%0A
-                                Username:%20<%= user.username %>%0D%0A
-                                Hostel%20Name:%20<%= user.hostelName %>%0D%0A
-                                Phone:%20<%= user.phone %>%0D%0A%0D%0A
-                                Location:%20<%= user.location %>%0D%0A%0D%0A
-                                I%20need%20support%20regarding%20my%20hostel%20services.%0D%0A%0D%0A
-                                Thank%20you!"
-                                target="_blank" 
-                                class="btn btn-primary">
-                                <i class="fa-solid fa-envelope">
-                                    
-                                </i> hostelnodehelp@gmail.com
+                                <a class="btn btn-sm btn-primary" 
+                                href="https://mail.google.com/mail/?view=cm&fs=1&to=<%= user.email %>&su=Welcome%20to%20HostelNode%20-%20Signup%20Successful!&body=Dear%20<%= user.name %>,%0D%0A%0D%0A
+                             🎉 Congratulations! Your signup on HostelNode is successful, and your account status is now Active.%0D%0A%0D%0A
+                             🔑 Your Login Details:%0D%0A
+                             - Username: <%= user.username %>%0D%0A
+                             - Hostel Name: <%= user.hostelName %>%0D%0A
+                             - Status: ✅ Active%0D%0A
+                             - Login Here: https://yourwebsite.com/login%0D%0A%0D%0A
+                             📘 User Manual & Features:%0D%0A
+                             ✔️ View and manage your assigned room & bed%0D%0A
+                             ✔️ Track your hostel fee payments & due dates%0D%0A
+                             ✔️ Receive important hostel announcements%0D%0A
+                             ✔️ Contact support for hostel-related queries%0D%0A%0D%0A
+                             📞 Need Help?%0D%0A
+                             📧 Email: hostelnodehelp@gmail.com%0D%0A
+                             📞 Phone: 7879884375%0D%0A%0D%0A
+                             Thank you for joining HostelNode!%0D%0A%0D%0A
+                             Best Regards,%0D%0A
+                             💼 HostelNode Team"
+                                target="_blank">
+                                <i class="fa-solid fa-envelope"></i> Send Signup Email
                              </a>
                              
                                  
