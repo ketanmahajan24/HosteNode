@@ -9,10 +9,9 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true }, // Hashed password
     phone: { type: String, unique: true, required: true }, // Phone number
     hostelName: { type: String, required: true }, // Hostel name
-
+    location: { type: String, required: true }, // Hostel name 
     status: { type: String, enum: ['Active', 'Inactive'], default: 'Active' }, // Account status
     createdAt: { type: String }, // Account creation date
- 
 });
 
 

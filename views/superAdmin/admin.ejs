@@ -135,7 +135,7 @@
            
           <span class="product-logo">
             <img style="height: 2rem; border-radius: 50%;" src="/images/product_icon.jpg" alt="user img">
-             <a  class="navbar-brand montserrat-subrayada-regular" href="#" >HostelNode</a>
+             <a  class="navbar-brand montserrat-subrayada-regular" href="#">HostelNode</a>
           </span>
            
             <!-- PROFILE  -->
@@ -211,6 +211,7 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Hostel Name</th>
+                        <th>Location</th>
                         <th>Signup Date</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -224,8 +225,8 @@
                             <td><%= user.email %></td>
                             <td><%= user.phone %></td>
                             <td><%= user.hostelName %></td>
+                            <td><%= user.location %></td>
                             <td><%= user.createdAt.toLocaleString() %></td>
-
                             <td><%= user.status %></td>
                             <td>
                                 <form method="POST" action="/dashboard/<%=user._id%>?_method=PUT" class="row g-4 needs-validation" enctype="application/x-www-form-urlencoded">
