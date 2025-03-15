@@ -27,7 +27,7 @@ const Payment = require("../models/payment.js"); // Payment SCHEMA
 
 
 // POST route to signup User
-router.post('/signup', async (req, res) => {
+router.post('/signup', async (req, res) =>{
     try {
         const {name,email,phone,hostelName,username,password} = req.body.user; // Assuming the request body contains the person data
 
@@ -38,7 +38,8 @@ router.post('/signup', async (req, res) => {
             phone:phone,
             hostelName:hostelName,
             username:username,
-            password:password
+            password:password,
+            createdAt: new Date()
         });
 
         // Save the new user to the database
