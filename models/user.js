@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     hostelName: { type: String, required: true }, // Hostel name
 
     status: { type: String, enum: ['Active', 'Inactive'], default: 'Active' }, // Account status
-    createdAt: { type: Date }, // Account creation date
+    createdAt: { type: String }, // Account creation date
  
 });
 
