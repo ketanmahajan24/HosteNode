@@ -75,8 +75,8 @@ const moment = require("moment");
 // const Room = require("./models/Room"); // Import Room model
 
 // Run every day at midnight (00:00)
-cron.schedule("46 15 * * *", async () => {
-  console.log("🔄 Running Monthly Fee Check at 3:30 PM...");
+cron.schedule("0 0 * * *", async () => {
+  console.log("🔄 Running Monthly Fee Check at 12:00 PM...");
      
     try {
         const today = moment().startOf("day"); // Get today's date
