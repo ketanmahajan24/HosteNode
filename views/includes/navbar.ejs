@@ -166,7 +166,7 @@
       
       <!-- PROFILE  -->
       <!-- <button class="navbar-toggler" type="button"> -->
-        <img  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="height: 2rem; border-radius: 25%; margin-right: 1rem;" src="/images/ketan_passport_2025.jpg" alt="user img">
+        <img  data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="height: 2rem; border-radius: 25%; margin-right: 1rem;" src="/images/userbadge.jpg" alt="user img">
       <!-- </button> -->
       <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
@@ -177,10 +177,10 @@
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
              
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#"> My Profile </a>
+              <a class="nav-link" aria-current="page" href="#"><%=user.hostelName%> </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Payment History</a>
+              <a class="nav-link" href="#"><%=user.phone%></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Help Center</a>
