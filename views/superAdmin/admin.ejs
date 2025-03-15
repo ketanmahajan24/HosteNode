@@ -235,30 +235,31 @@
                                 </form> 
                             </td>
                             <td>
-                                <button class="btn btn-sm btn-primary"><a class="btn btn-primary"
-                                    href="mailto:<%= user.email %>?subject=Welcome%20to%20HostelNode%20-%20Signup%20Successful!&body=Dear%20<%= user.name %>,%0D%0A%0D%0A
-                                    🎉 Congratulations! Your signup on HostelNode is successful, and your account status is now Active.%0D%0A%0D%0A
-                                    🔑 Your Login Details:%0D%0A
-                                    - Username: <%= user.username %>%0D%0A
-                                    - Hostel Name: <%= user.hostelName %>%0D%0A
-                                    - Status: ✅ Active%0D%0A
-                                    - Login Here: https://yourwebsite.com/login%0D%0A%0D%0A
-                                    📘 User Manual & Features:%0D%0A
-                                    ✔️ View and manage your assigned room & bed%0D%0A
-                                    ✔️ Track your hostel fee payments & due dates%0D%0A
-                                    ✔️ Receive important hostel announcements%0D%0A
-                                    ✔️ Contact support for hostel-related queries%0D%0A%0D%0A
-                                    📞 Need Help?%0D%0A
-                                    📧 Email: hostelnodehelp@gmail.com%0D%0A
-                                    📞 Phone: 7879884375%0D%0A%0D%0A
-                                    Thank you for joining HostelNode!%0D%0A%0D%0A
-                                    Best Regards,%0D%0A
-                                    💼 HostelNode Team"
-                                    target="_blank">
-                                    Send Mail
-                                 </a>
+                                <a class="btn btn-sm btn-primary" 
+                                href="https://mail.google.com/mail/?view=cm&fs=1&to=<%= user.email %>&su=Welcome%20to%20HostelNode%20-%20Signup%20Successful!&body=Dear%20<%= user.name %>,%0D%0A%0D%0A
+                             🎉 Congratulations! Your signup on HostelNode is successful, and your account status is now Active.%0D%0A%0D%0A
+                             🔑 Your Login Details:%0D%0A
+                             - Username: <%= user.username %>%0D%0A
+                             - Hostel Name: <%= user.hostelName %>%0D%0A
+                             - Status: ✅ Active%0D%0A
+                             - Login Here: https://yourwebsite.com/login%0D%0A%0D%0A
+                             📘 User Manual & Features:%0D%0A
+                             ✔️ View and manage your assigned room & bed%0D%0A
+                             ✔️ Track your hostel fee payments & due dates%0D%0A
+                             ✔️ Receive important hostel announcements%0D%0A
+                             ✔️ Contact support for hostel-related queries%0D%0A%0D%0A
+                             📞 Need Help?%0D%0A
+                             📧 Email: hostelnodehelp@gmail.com%0D%0A
+                             📞 Phone: 7879884375%0D%0A%0D%0A
+                             Thank you for joining HostelNode!%0D%0A%0D%0A
+                             Best Regards,%0D%0A
+                             💼 HostelNode Team"
+                                target="_blank">
+                                <i class="fa-solid fa-envelope"></i> Send Signup Email
+                             </a>
+                             
                                  
-                                 </button>
+                                 
                             </td>
                         </tr>
                     <% }) %>
