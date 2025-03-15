@@ -215,6 +215,7 @@
                         <th>Signup Date</th>
                         <th>Status</th>
                         <th>Actions</th>
+                        <th>Send Mail to User </th>
                     </tr>
                 </thead>
                 <tbody id="userTable">
@@ -232,6 +233,34 @@
                                 <form method="POST" action="/dashboard/<%=user._id%>?_method=PUT" class="row g-4 needs-validation" enctype="application/x-www-form-urlencoded">
                                              <button class="btn btn-sm btn-primary">Change Status</button>
                                 </form> 
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"><a class="btn btn-primary"
+                                    href="https://mail.google.com/mail/?view=cm&fs=1
+                                    &to=hostelnodehelp@gmail.com
+                                    &su=Welcome%20to%20HostelNode%20-%20Signup%20Successful!
+                                    &body=Dear%20<%= user.user %>,%0D%0A%0D%0A
+                                    Congratulations!%20🎉%20Your%20signup%20on%20HostelNode%20is%20successful,%20and%20your%20account%20status%20is%20now%20**Active**.%0D%0A%0D%0A
+                                    🔑%20**Your%20Login%20Details:**%0D%0A
+                                    -%20**Username:**%20<%= user.username %>%0D%0A
+                                    -%20**Hostel%20Name:**%20<%= user.hostelName %>%0D%0A
+                                    -%20**Status:**%20✅%20Active%0D%0A
+                                    -%20**Login%20Here:**%20[Your%20Website%20Login%20URL]%0D%0A%0D%0A
+                                    📘%20**User%20Manual%20&%20Features:**%0D%0A
+                                    ✔️%20View%20and%20manage%20your%20assigned%20room%20&%20bed%0D%0A
+                                    ✔️%20Track%20your%20hostel%20fee%20payments%20&%20due%20dates%0D%0A
+                                    ✔️%20Receive%20important%20hostel%20announcements%0D%0A
+                                    ✔️%20**Contact%20support**%20for%20hostel-related%20queries%0D%0A%0D%0A
+                                    📞%20**Need%20Help?**%0D%0A
+                                    📧%20Email:%20hostelnodehelp@gmail.com%0D%0A
+                                    📞%20Phone:%207879884375%0D%0A%0D%0A
+                                    Thank%20you%20for%20joining%20HostelNode!%0D%0A%0D%0A
+                                    Best%20Regards,%0D%0A
+                                    💼%20**HostelNode%20Team**"
+                                    target="_blank">
+                                    <i class="fa-solid fa-envelope"></i> Send Email
+                                 </a>
+                                 </button>
                             </td>
                         </tr>
                     <% }) %>
