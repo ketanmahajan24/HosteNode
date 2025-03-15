@@ -43,6 +43,7 @@ router.post('/signup', async (req, res) =>{
             hostelName:hostelName,
             username:username,
             password:password,
+            location:location,
             createdAt:  currentISTTime
         });
 
