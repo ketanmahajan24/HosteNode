@@ -33,7 +33,7 @@ const currentISTTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss")
 // POST route to signup User
 router.post('/signup', async (req, res) =>{
     try {
-        const {name,email,phone,hostelName,username,password} = req.body.user; // Assuming the request body contains the person data
+        const {name,email,location,phone,hostelName,username,password} = req.body.user; // Assuming the request body contains the person data
 
         // Create a new Person document using the Mongoose model
         const newUser = new User({
