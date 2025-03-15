@@ -122,11 +122,22 @@
 <!-- MANAGE FLOORS  --> <!--End -->
           
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Reviews</a>
+            <a class="nav-link" aria-current="page" target="_blank" 
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=ketanmahajan2003@gmail.com
+            &su=Feedback from <%= user.username %>
+            &body=Hello Ketan,%0D%0A%0D%0A
+            My Name: <%= user.user %>%0D%0A
+            Username: <%= user.username %>%0D%0A
+            Hostel Name: <%= user.hostelName %>%0D%0A
+            Phone: <%= user.phone %>%0D%0A
+            %0D%0AI would like to share my feedback about the hostel services.%0D%0A%0D%0A
+            Thank you!">
+
+            <i class="fa-solid fa-message"></i> Send Feedback
+         </a>
+         
           </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#"> <i class="fa-solid fa-gear"></i> Settings</a>
-          </li>
+           
           
           <!-- <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#"></a>
@@ -193,10 +204,29 @@
         <li><a class="nav-link dropdown-item" href="tel:+917879884375"> <i class="fa-solid fa-phone"></i>  +91 7879884375</a></li>
 
          <li>
-               <a class="nav-link dropdown-item"  href="mailto:ketanmahajan2003@gmail.com?subject=User%20Name&body=Hello%20Ketan,%0D%0A%0D%0AI%20need%20support%20regarding%20your%20services.%0D%0A%0D%0AThank%20you!" class="btn btn-primary">
+               <a class="nav-link dropdown-item"   href="https://mail.google.com/mail/?view=cm&fs=1
+                &to=ketanmahajan2003@gmail.com
+                &su=Support%20Request%20for%20Hostel%20Services
+                &body=Hello%20Ketan,%0D%0A%0D%0A
+                My%20Name:%20<%= user.user %>%0D%0A
+                Username:%20<%= user.username %>%0D%0A
+                Hostel%20Name:%20<%= user.hostelName %>%0D%0A
+                Phone:%20<%= user.phone %>%0D%0A%0D%0A
+                I%20need%20support%20regarding%20my%20hostel%20services.%0D%0A%0D%0A
+                Thank%20you!"
+                target="_blank" 
+                class="btn btn-primary">
                 <i class="fa-solid fa-envelope"></i> Send Mail
-      </a>
+              </a>
     </li>
+    <li>
+            <a class="nav-link" href="https://www.linkedin.com/in/ketan-mahajan24" target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+      </a>
+      <a class="nav-link" href="https://www.instagram.com/your_instagram_username" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+      </a>
+  </li>
       <li>
         <hr class="dropdown-divider">
       </li>
