@@ -24,6 +24,10 @@ const Payment = require("../models/payment.js"); // Payment SCHEMA
 ////// admin dashboard
 
 
+const moment = require("moment-timezone");
+
+// Get current time in IST
+const currentISTTime = moment().tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
 
 
 // POST route to signup User
@@ -39,7 +43,7 @@ router.post('/signup', async (req, res) =>{
             hostelName:hostelName,
             username:username,
             password:password,
-            createdAt: new Date()
+            createdAt:  currentISTTime
         });
 
         // Save the new user to the database
