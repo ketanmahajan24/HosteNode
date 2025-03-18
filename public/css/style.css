@@ -1,9 +1,13 @@
+*{
+  font-family:  "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
 /* 1 *//* navbar product logo fonts  */
 body{
   /* padding: 20px; */
   /* color: azure; */
-  background: rgb(1, 9, 15);
-  font-family: 'Inter', sans-serif; /* Use 'Poppins', 'Roboto', or 'Nunito' as alternatives */
+  /* background: rgb(1, 9, 15); */
+  background: #fff;
+  font-family: 'Inter', sans-serif;  
   /* font-family:  "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif; */
   
 }
@@ -12,6 +16,7 @@ body{
     font-weight: 500;
     font-style: normal;
     font-size:x-large;
+    /* color: #6c1af0; */
     color:  rgb(255, 255, 255);
   }
     /* search icon */
